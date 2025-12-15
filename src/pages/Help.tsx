@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin, Clock, MessageSquare, Send } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, MessageSquare } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -40,10 +39,9 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
-export default function Help() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
+const WHATSAPP_NUMBER = "919564400943";
 
+export default function Help() {
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -55,18 +53,18 @@ export default function Help() {
     }
   });
 
-  const onSubmit = async (data: FormData) => {
-    setIsSubmitting(true);
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    setIsSubmitting(false);
-    
-    toast({
-      title: "Message Sent!",
-      description: "Our team will contact you within 24 hours."
-    });
-    
-    form.reset();
+  const onSubmit = (data: FormData) => {
+    const courseName = courses.find(c => c.id === data.course)?.shortTitle || data.course || "Not specified";
+    const message = `Hi, I'm interested in WMCH programs.
+
+*Name:* ${data.name}
+*Email:* ${data.email}
+*Phone:* ${data.phone}
+*Interested Program:* ${courseName}
+*Message:* ${data.message}`;
+
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`, "_blank");
   };
 
   return (
@@ -265,15 +263,9 @@ export default function Help() {
                       )}
                     />
 
-                    <Button type="submit" size="lg" disabled={isSubmitting}>
-                      {isSubmitting ? (
-                        "Sending..."
-                      ) : (
-                        <>
-                          Send Message
-                          <Send className="ml-2 h-4 w-4" />
-                        </>
-                      )}
+                    <Button type="submit" size="lg" className="bg-[#25D366] hover:bg-[#20BA5C]">
+                      <MessageSquare className="mr-2 h-4 w-4" />
+                      Continue in WhatsApp
                     </Button>
                   </form>
                 </Form>

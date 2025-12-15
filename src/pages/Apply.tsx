@@ -106,7 +106,7 @@ export default function Apply() {
     startCountdown();
     toast({
       title: "OTP Resent",
-      description: "A new OTP has been sent to your phone."
+      description: "A new OTP has been sent to your email."
     });
   };
 
@@ -260,9 +260,9 @@ export default function Apply() {
           {step === "otp" && formData && (
             <Card>
               <CardHeader className="text-center">
-                <CardTitle className="text-2xl">Verify Your Number</CardTitle>
+                <CardTitle className="text-2xl">Verify Your Email</CardTitle>
                 <CardDescription>
-                  We've sent a 4-digit OTP to +91 {formData.phone}
+                  We've sent a 4-digit OTP to {formData.email}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
