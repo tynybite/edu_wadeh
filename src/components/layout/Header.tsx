@@ -44,22 +44,22 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80">
-      {/* Top Bar */}
-      <div className="bg-secondary">
-        <div className="container flex h-10 items-center justify-between text-sm text-secondary-foreground">
+      {/* Top Bar - Navy Style */}
+      <div className="bg-primary">
+        <div className="container flex h-10 items-center justify-between text-sm text-primary-foreground">
           <div className="flex items-center gap-4">
-            <a href={`tel:${contactInfo.phone}`} className="flex items-center gap-1 hover:text-accent transition-colors">
+            <a href={`tel:${contactInfo.phone}`} className="flex items-center gap-1 hover:text-secondary transition-colors">
               <Phone className="h-3 w-3" />
               <span>+91 {contactInfo.phone}</span>
             </a>
-            <span className="hidden sm:inline">|</span>
-            <a href={`mailto:${contactInfo.email}`} className="hidden sm:inline hover:text-accent transition-colors">
+            <span className="hidden sm:inline opacity-50">|</span>
+            <a href={`mailto:${contactInfo.email}`} className="hidden sm:inline hover:text-secondary transition-colors">
               {contactInfo.email}
             </a>
           </div>
           <div className="flex items-center gap-4">
-            <span className="hidden md:inline text-accent font-medium animate-pulse">
-              📚 Admissions Open for 2026!
+            <span className="hidden md:inline text-secondary font-medium">
+              Admissions Open for 2026!
             </span>
           </div>
         </div>
