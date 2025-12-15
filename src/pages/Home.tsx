@@ -97,81 +97,96 @@ export default function Home() {
 
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${heroBg})` }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-secondary/95 via-secondary/80 to-secondary/60" />
+      {/* Hero Section - Online Manipal Style */}
+      <section className="relative bg-background overflow-hidden">
+        {/* Top announcement bar */}
+        <div className="bg-primary text-primary-foreground py-2 text-center text-sm">
+          <span>📚 Admissions Open for 2026 — </span>
+          <Link to="/apply" className="underline font-medium hover:text-accent">Enroll Now until 05/03/2026!</Link>
         </div>
-        
-        <div className="container relative z-10 py-20">
-          <div className="max-w-3xl">
-            {/* Admission Banner */}
-            <Badge className="mb-6 px-4 py-2 text-sm animate-pulse">
-              📚 Admission Open for 2026 — Enroll Now until 05/03/2026!
-            </Badge>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-secondary-foreground mb-6 leading-tight">
-              Admission Open for{" "}
-              <span className="text-accent">2026</span>
-            </h1>
+        <div className="container py-12 lg:py-20">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              {/* Accreditation Badge */}
+              <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full bg-muted">
+                <CheckCircle className="h-5 w-5 text-secondary" />
+                <span className="text-sm font-medium text-foreground">UGC-Entitled • NAAC A+</span>
+              </div>
 
-            <p className="text-xl md:text-2xl text-secondary-foreground/90 mb-4">
-              Shape your future with us!
-            </p>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
+                Education That Powers Your{" "}
+                <span className="text-secondary border-b-4 border-accent pb-1">Ambition</span>
+              </h1>
 
-            <p className="text-lg text-secondary-foreground/80 mb-8 max-w-2xl">
-              {branding.tagline} — Join {branding.name} and embark on a transformative journey in Electro-Homeopathy medicine and healthcare.
-            </p>
+              <p className="text-xl text-muted-foreground mb-8">
+                {branding.tagline} — <span className="text-secondary font-medium">Wadeh Medical College & Hospital</span>
+              </p>
 
-            {/* Accreditation Badges */}
-            <div className="flex flex-wrap gap-3 mb-8">
-              {branding.accreditations.map((acc) => (
-                <span key={acc} className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-secondary-foreground/10 text-secondary-foreground text-sm">
-                  <CheckCircle className="h-4 w-4" />
-                  {acc}
-                </span>
-              ))}
-            </div>
-
-            {/* CTAs */}
-            <div className="flex flex-wrap gap-4">
-              <Button size="lg" asChild className="text-lg px-8">
+              {/* CTA */}
+              <Button size="lg" asChild className="text-lg px-8 bg-accent hover:bg-accent/90">
                 <Link to="/apply">Apply Now</Link>
               </Button>
-              <Button size="lg" variant="outline" asChild className="text-lg px-8 bg-transparent border-secondary-foreground/30 text-secondary-foreground hover:bg-secondary-foreground/10">
-                <Link to="/courses">
-                  View All Courses
-                  <ArrowRight className="ml-2 h-5 w-5" />
+            </div>
+
+            {/* Hero Image Area */}
+            <div className="relative hidden lg:block">
+              <div 
+                className="aspect-square rounded-3xl bg-cover bg-center"
+                style={{ backgroundImage: `url(${heroBg})` }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-secondary/20 to-primary/20 rounded-3xl" />
+              </div>
+              {/* Decorative elements */}
+              <div className="absolute -top-4 -right-4 w-24 h-24 bg-accent/20 rounded-full blur-2xl" />
+              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-secondary/20 rounded-full blur-2xl" />
+            </div>
+          </div>
+        </div>
+
+        {/* Program Cards Carousel - Online Manipal Style */}
+        <div className="bg-card border-t border-border py-8">
+          <div className="container">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {courses.map((course) => (
+                <Link
+                  key={course.id}
+                  to={`/program/${course.id}`}
+                  className="group p-4 rounded-xl border border-border bg-background hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                >
+                  <div className="h-20 rounded-lg bg-gradient-to-br from-secondary/20 to-primary/10 mb-3 flex items-center justify-center">
+                    <GraduationCap className="h-8 w-8 text-secondary" />
+                  </div>
+                  <h3 className="font-semibold text-foreground group-hover:text-secondary transition-colors text-center">
+                    {course.shortTitle}
+                  </h3>
                 </Link>
-              </Button>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Stats Band */}
-      <Section className="bg-primary py-8">
-        <StatsGrid className="text-primary-foreground">
-          <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold">5000+</div>
+      {/* Stats Band - Cleaner Style */}
+      <Section className="bg-primary py-10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-primary-foreground text-center">
+          <div>
+            <div className="text-4xl md:text-5xl font-bold mb-1">5000+</div>
             <div className="text-sm opacity-80">Learners Empowered</div>
           </div>
-          <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold">95%</div>
+          <div>
+            <div className="text-4xl md:text-5xl font-bold mb-1">95%</div>
             <div className="text-sm opacity-80">Positive Program ROI</div>
           </div>
-          <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold">98%</div>
+          <div>
+            <div className="text-4xl md:text-5xl font-bold mb-1">98%</div>
             <div className="text-sm opacity-80">Student Satisfaction</div>
           </div>
-          <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold">15+</div>
+          <div>
+            <div className="text-4xl md:text-5xl font-bold mb-1">15+</div>
             <div className="text-sm opacity-80">States Reached</div>
           </div>
-        </StatsGrid>
+        </div>
       </Section>
 
       {/* Top Programs */}
