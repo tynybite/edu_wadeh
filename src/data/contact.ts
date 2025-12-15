@@ -1,6 +1,6 @@
 export const contactInfo = {
   phone: "9564400943",
-  email: "dr.wahidurrahaman@gmail.com",
+  email: "admissions@wadeh.in",
   website: "www.wadeh.in",
   address: {
     full: "Nalhati, Nazrul Palli near Jumma Masjid, Birbhum, 731243",

@@ -6,6 +6,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Courses from "./pages/Courses";
 import Program from "./pages/Program";
+import BemsProgram from "./pages/programs/BemsProgram";
+import MdProgram from "./pages/programs/MdProgram";
+import DemsProgram from "./pages/programs/DemsProgram";
+import CemsProgram from "./pages/programs/CemsProgram";
 import Placements from "./pages/Placements";
 import Stipend from "./pages/Stipend";
 import Blogs from "./pages/Blogs";
@@ -26,6 +30,10 @@ const App = () => (
           <Route path="/" element={<Home />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/program/:id" element={<Program />} />
+          <Route path="/programs/bems" element={<BemsProgram />} />
+          <Route path="/programs/md" element={<MdProgram />} />
+          <Route path="/programs/dems" element={<DemsProgram />} />
+          <Route path="/programs/cems" element={<CemsProgram />} />
           <Route path="/placements" element={<Placements />} />
           <Route path="/stipend" element={<Stipend />} />
           <Route path="/blogs" element={<Blogs />} />

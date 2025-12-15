@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Search, Phone, ChevronDown, GraduationCap } from "lucide-react";
+import { Menu, X, Search, Phone, ChevronDown, GraduationCap, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
@@ -17,18 +17,18 @@ const navItems = [
     label: "Programs",
     href: "/courses",
     children: [
-      { label: "B.E.M.S. (Bachelor's)", href: "/courses?degree=BEMS" },
-      { label: "M.D. (Master's)", href: "/courses?degree=MD" },
-      { label: "D.E.M.S. (Diploma)", href: "/courses?degree=DEMS" },
-      { label: "C.E.M.S. (Certificate)", href: "/courses?degree=CEMS" },
+      { label: "B.E.M.S. (Bachelor's)", href: "/programs/bems" },
+      { label: "M.D. (Master's)", href: "/programs/md" },
+      { label: "D.E.M.S. (Diploma)", href: "/programs/dems" },
+      { label: "C.E.M.S. (Certificate)", href: "/programs/cems" },
     ],
   },
   {
     label: "Institutions",
     href: "#",
     children: [
-      { label: "Wadeh Medical College", href: "/courses?dept=College" },
-      { label: "Wadeh Hospital", href: "/courses?dept=Hospital" },
+      { label: "Wadeh Medical College", href: "/", internal: true },
+      { label: "Wadeh Hospital", href: "https://wadeh.in", external: true, icon: true },
     ],
   },
   { label: "Placements", href: "/placements" },
@@ -92,7 +92,19 @@ export function Header() {
                 <DropdownMenuContent align="start" className="w-56">
                   {item.children.map((child) => (
                     <DropdownMenuItem key={child.label} asChild>
-                      <Link to={child.href}>{child.label}</Link>
+                      {child.external ? (
+                        <a
+                          href={child.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center justify-between w-full"
+                        >
+                          <span>{child.label}</span>
+                          {child.icon && <ExternalLink className="h-3.5 w-3.5 ml-2" />}
+                        </a>
+                      ) : (
+                        <Link to={child.href}>{child.label}</Link>
+                      )}
                     </DropdownMenuItem>
                   ))}
                 </DropdownMenuContent>
@@ -152,13 +164,26 @@ export function Header() {
                         <span className="font-medium text-foreground">{item.label}</span>
                         <div className="ml-4 space-y-2">
                           {item.children.map((child) => (
-                            <Link
-                              key={child.label}
-                              to={child.href}
-                              className="block text-muted-foreground hover:text-primary transition-colors"
-                            >
-                              {child.label}
-                            </Link>
+                            child.external ? (
+                              <a
+                                key={child.label}
+                                href={child.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center justify-between text-muted-foreground hover:text-primary transition-colors"
+                              >
+                                <span>{child.label}</span>
+                                {child.icon && <ExternalLink className="h-3.5 w-3.5 ml-2" />}
+                              </a>
+                            ) : (
+                              <Link
+                                key={child.label}
+                                to={child.href}
+                                className="block text-muted-foreground hover:text-primary transition-colors"
+                              >
+                                {child.label}
+                              </Link>
+                            )
                           ))}
                         </div>
                       </div>
