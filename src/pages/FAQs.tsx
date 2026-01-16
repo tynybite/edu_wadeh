@@ -174,7 +174,7 @@ export default function FAQs() {
               <Link to="/help">Talk to a Counselor</Link>
             </Button>
             <Button variant="outline" asChild>
-              <a href="mailto:dr.wahidurrahaman@gmail.com">Email Us</a>
+              <a href="mailto:wadeh.mch@gmail.com">Email Us</a>
             </Button>
           </div>
         </div>
