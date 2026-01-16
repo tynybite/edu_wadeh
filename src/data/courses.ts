@@ -2,7 +2,7 @@ export interface Course {
   id: string;
   title: string;
   shortTitle: string;
-  degreeType: "BEMS" | "MD" | "DEMS" | "CEMS";
+  degreeType: "BEMS" | "MD" | "DEMS" | "CEMS" | "PHD";
   department: "College" | "Hospital";
   durationMonths: number;
   tuitionINR: number;
@@ -16,6 +16,8 @@ export interface Course {
   eligibility: string[];
   outcomes: string[];
   featured: boolean;
+  durationDisplay?: string;
+  tuitionDisplay?: string;
 }
 
 export const courses: Course[] = [
@@ -25,8 +27,10 @@ export const courses: Course[] = [
     shortTitle: "B.E.M.S.",
     degreeType: "BEMS",
     department: "College",
-    durationMonths: 48,
-    tuitionINR: 150000,
+    durationMonths: 54,
+    durationDisplay: "54 months",
+    tuitionINR: 1000000,
+    tuitionDisplay: "10 Lakhs *",
     rating: 4.7,
     reviewCount: 245,
     tags: ["Most Popular", "In-Demand"],
@@ -45,7 +49,9 @@ export const courses: Course[] = [
     degreeType: "MD",
     department: "College",
     durationMonths: 24,
-    tuitionINR: 200000,
+    durationDisplay: "2 - 5 years",
+    tuitionINR: 900000,
+    tuitionDisplay: "9 Lakhs",
     rating: 4.8,
     reviewCount: 89,
     tags: ["Advanced", "Research Focus"],
@@ -55,6 +61,27 @@ export const courses: Course[] = [
     description: "An advanced 2-year postgraduate program for qualified practitioners seeking specialization in Electro-Homeopathy research and advanced clinical practice.",
     eligibility: ["B.E.M.S. or equivalent degree", "Minimum 55% in undergraduate", "Clinical experience preferred"],
     outcomes: ["Specialist Practitioner", "Research Leadership", "Academic Excellence", "Advanced Clinical Skills"],
+    featured: true
+  },
+  {
+    id: "phd",
+    title: "Doctor of Philosophy in Electro-Homeopathy",
+    shortTitle: "Ph.D.",
+    degreeType: "PHD",
+    department: "College",
+    durationMonths: 36,
+    durationDisplay: "2 - 5 years",
+    tuitionINR: 250000,
+    tuitionDisplay: "Ask for Details",
+    rating: 5.0,
+    reviewCount: 12,
+    tags: ["Doctoral", "Research"],
+    specializations: ["Advanced Research", "Thesis Work", "Publication"],
+    badges: ["Doctorate", "Research Focused"],
+    ctaLabel: "Explore Program",
+    description: "The highest academic degree in Electro-Homeopathy, focusing on original research and contribution to the medical field.",
+    eligibility: ["M.D. in Electro-Homeopathy", "Research Proposal", "Interview"],
+    outcomes: ["Research Scientist", "Academic Professor", "Doctorate Holder", "Medical Author"],
     featured: true
   },
   {
@@ -74,7 +101,7 @@ export const courses: Course[] = [
     description: "A 2-year diploma program providing foundational knowledge and practical skills in Electro-Homeopathy for aspiring healthcare practitioners.",
     eligibility: ["10+2 or equivalent", "Science background preferred", "Valid ID proof"],
     outcomes: ["Certified Practitioner", "OPD Management", "Patient Counseling", "Basic Clinical Skills"],
-    featured: false
+    featured: true
   },
   {
     id: "cems",
@@ -101,7 +128,8 @@ export const degreeTypes = [
   { id: "BEMS", label: "Bachelor's", description: "4-year undergraduate program" },
   { id: "MD", label: "Master's", description: "2-year postgraduate program" },
   { id: "DEMS", label: "Diploma", description: "2-year professional diploma" },
-  { id: "CEMS", label: "Certificate", description: "6-month foundation course" }
+  { id: "CEMS", label: "Certificate", description: "6-month foundation course" },
+  { id: "PHD", label: "PhD", description: "Doctoral research program" }
 ];
 
 export const departments = [

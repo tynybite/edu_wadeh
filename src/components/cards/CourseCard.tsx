@@ -40,7 +40,7 @@ export function CourseCard({ course, variant = "default" }: CourseCardProps) {
           <div className="flex items-center justify-between text-sm">
             <div className="flex items-center gap-1 text-muted-foreground">
               <Clock className="h-4 w-4" />
-              <span>{course.durationMonths} months</span>
+              <span>{course.durationDisplay || `${course.durationMonths} months`}</span>
             </div>
             <div className="flex items-center gap-1">
               <Star className="h-4 w-4 fill-accent text-accent" />
@@ -66,7 +66,7 @@ export function CourseCard({ course, variant = "default" }: CourseCardProps) {
             <div className="flex items-baseline justify-between">
               <span className="text-sm text-muted-foreground">Starting from</span>
               <span className="text-lg font-bold text-foreground">
-                ₹{course.tuitionINR.toLocaleString("en-IN")}
+                {course.tuitionDisplay ? (course.tuitionDisplay.includes("Lakhs") || course.tuitionDisplay.includes("*") ? `₹ ${course.tuitionDisplay}` : `₹${course.tuitionDisplay}`) : `₹${course.tuitionINR.toLocaleString("en-IN")}`}
               </span>
             </div>
           </div>

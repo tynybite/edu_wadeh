@@ -95,7 +95,7 @@ export default function Courses() {
           <div className="flex gap-2">
             <Select value={selectedDegree} onValueChange={(value) => {
               const params = new URLSearchParams(searchParams);
-              if (value) params.set("degree", value);
+              if (value && value !== "all") params.set("degree", value);
               else params.delete("degree");
               setSearchParams(params);
             }}>
@@ -103,7 +103,7 @@ export default function Courses() {
                 <SelectValue placeholder="Degree Type" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All Degrees</SelectItem>
+                <SelectItem value="all">All Degrees</SelectItem>
                 {degreeTypes.map((type) => (
                   <SelectItem key={type.id} value={type.id}>{type.label}</SelectItem>
                 ))}
@@ -112,7 +112,7 @@ export default function Courses() {
 
             <Select value={selectedDept} onValueChange={(value) => {
               const params = new URLSearchParams(searchParams);
-              if (value) params.set("dept", value);
+              if (value && value !== "all") params.set("dept", value);
               else params.delete("dept");
               setSearchParams(params);
             }}>
@@ -120,7 +120,7 @@ export default function Courses() {
                 <SelectValue placeholder="Department" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All Departments</SelectItem>
+                <SelectItem value="all">All Departments</SelectItem>
                 {departments.map((dept) => (
                   <SelectItem key={dept.id} value={dept.id}>{dept.name}</SelectItem>
                 ))}

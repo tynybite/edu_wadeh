@@ -81,7 +81,7 @@ export default function Program() {
               <div className="flex flex-wrap gap-6 text-secondary-foreground">
                 <div className="flex items-center gap-2">
                   <Clock className="h-5 w-5" />
-                  <span>{course.durationMonths} months</span>
+                  <span>{course.durationDisplay || `${course.durationMonths} months`}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Star className="h-5 w-5 fill-accent text-accent" />
@@ -103,13 +103,13 @@ export default function Program() {
                 <CardContent className="space-y-4">
                   <div className="flex justify-between items-center pb-4 border-b">
                     <span className="text-muted-foreground">Tuition Fee</span>
-                    <span className="text-2xl font-bold">₹{course.tuitionINR.toLocaleString("en-IN")}</span>
+                    <span className="text-2xl font-bold">{course.tuitionDisplay ? `₹ ${course.tuitionDisplay}` : `₹${course.tuitionINR.toLocaleString("en-IN")}`}</span>
                   </div>
                   
                   <div className="space-y-3">
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Duration</span>
-                      <span>{course.durationMonths} months</span>
+                      <span>{course.durationDisplay || `${course.durationMonths} months`}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Department</span>

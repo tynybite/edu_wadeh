@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Search, Phone, ChevronDown, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,6 +19,7 @@ const navItems = [
     children: [
       { label: "B.E.M.S. (Bachelor's)", href: "/programs/bems" },
       { label: "M.D. (Master's)", href: "/programs/md" },
+      { label: "Ph.D. (Doctorate)", href: "/programs/phd" },
       { label: "D.E.M.S. (Diploma)", href: "/programs/dems" },
       { label: "C.E.M.S. (Certificate)", href: "/programs/cems" },
     ],
@@ -149,6 +150,9 @@ export function Header() {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-80">
+              <div className="sr-only">
+                <SheetTitle>Mobile Navigation Menu</SheetTitle>
+              </div>
               <div className="flex flex-col gap-4 mt-8">
                 <Link to="/" className="flex items-center gap-2 mb-4">
                   <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-lg">
