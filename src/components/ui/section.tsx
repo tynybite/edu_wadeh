@@ -24,6 +24,7 @@ interface SectionHeaderProps {
   description?: string;
   align?: "left" | "center";
   className?: string;
+  variant?: "default" | "inverted";
 }
 
 export function SectionHeader({ 
@@ -31,7 +32,8 @@ export function SectionHeader({
   subtitle, 
   description, 
   align = "center",
-  className 
+  className,
+  variant = "default"
 }: SectionHeaderProps) {
   return (
     <div className={cn(
@@ -40,15 +42,24 @@ export function SectionHeader({
       className
     )}>
       {subtitle && (
-        <span className="inline-block text-sm font-medium text-primary mb-2 uppercase tracking-wider">
+        <span className={cn(
+          "inline-block text-sm font-medium mb-2 uppercase tracking-wider",
+          variant === "inverted" ? "text-accent" : "text-primary"
+        )}>
           {subtitle}
         </span>
       )}
-      <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4">
+      <h2 className={cn(
+        "text-2xl md:text-3xl lg:text-4xl font-bold mb-4",
+        variant === "inverted" ? "text-primary-foreground" : "text-foreground"
+      )}>
         {title}
       </h2>
       {description && (
-        <p className="text-muted-foreground text-lg">
+        <p className={cn(
+          "text-lg",
+          variant === "inverted" ? "text-primary-foreground/80" : "text-muted-foreground"
+        )}>
           {description}
         </p>
       )}

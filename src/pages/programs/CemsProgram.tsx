@@ -26,7 +26,7 @@ export default function CemsProgram() {
             <section className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground py-16 md:py-24">
                 <div className="container">
                     <div className="max-w-4xl mx-auto text-center">
-                        <Badge className="mb-4 bg-secondary text-secondary-foreground">Entry Level • No Experience Required</Badge>
+                        <Badge className="mb-4 bg-white/20 text-white border-0">Entry Level • No Experience Required</Badge>
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
                             Certificate in Electro-Homeopathy Medicine
                         </h1>
@@ -94,10 +94,11 @@ export default function CemsProgram() {
             </Section>
 
             {/* Program Overview */}
-            <Section className="bg-secondary">
+            <Section className="bg-primary text-primary-foreground">
                 <SectionHeader
                     title="Program Overview"
                     subtitle="Your first step into Electro-Homeopathy"
+                    variant="inverted"
                 />
                 <div className="grid gap-8 lg:grid-cols-2">
                     <div>
@@ -134,7 +135,7 @@ export default function CemsProgram() {
                                 "Holistic healthcare concepts"
                             ].map((item, index) => (
                                 <li key={index} className="flex items-start gap-2">
-                                    <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                                    <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
                                     <span>{item}</span>
                                 </li>
                             ))}
@@ -245,8 +246,9 @@ export default function CemsProgram() {
             {/* Career Outcomes */}
             <Section>
                 <SectionHeader
-                    title="Career Outcomes"
-                    subtitle="What you can achieve after C.E.M.S."
+                    title="Career Opportunities"
+                    subtitle="Practical skills for real-world application"
+                    variant="inverted"
                 />
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     {[
@@ -280,10 +282,11 @@ export default function CemsProgram() {
             </Section>
 
             {/* Curriculum Highlights */}
-            <Section className="bg-secondary">
+            <Section className="bg-primary text-primary-foreground">
                 <SectionHeader
                     title="Curriculum Highlights"
                     subtitle="What you'll learn during the 6-month program"
+                    variant="inverted"
                 />
                 <Accordion type="single" collapsible className="w-full">
                     <AccordionItem value="module1">
@@ -378,45 +381,45 @@ export default function CemsProgram() {
             </Section>
 
             {/* FAQs */}
-            <Section className="bg-secondary">
+            <Section className="bg-secondary text-secondary-foreground">
                 <SectionHeader
                     title="Frequently Asked Questions"
                     subtitle="Common questions about C.E.M.S. program"
                 />
                 <Accordion type="single" collapsible className="w-full">
-                    <AccordionItem value="faq1">
-                        <AccordionTrigger>Can I practice after completing C.E.M.S.?</AccordionTrigger>
-                        <AccordionContent>
+                    <AccordionItem value="faq1" className="border-black/10">
+                        <AccordionTrigger className="hover:text-primary hover:no-underline">Can I practice after completing C.E.M.S.?</AccordionTrigger>
+                        <AccordionContent className="text-secondary-foreground/80">
                             C.E.M.S. provides foundational knowledge and awareness but does not qualify you as a
                             licensed practitioner. To practice professionally, you would need to pursue D.E.M.S. or B.E.M.S.
                             However, you can use your knowledge for community health awareness and personal wellness.
                         </AccordionContent>
                     </AccordionItem>
-                    <AccordionItem value="faq2">
-                        <AccordionTrigger>Can I pursue higher studies after C.E.M.S.?</AccordionTrigger>
-                        <AccordionContent>
+                    <AccordionItem value="faq2" className="border-black/10">
+                        <AccordionTrigger className="hover:text-primary hover:no-underline">Can I pursue higher studies after C.E.M.S.?</AccordionTrigger>
+                        <AccordionContent className="text-secondary-foreground/80">
                             Absolutely! C.E.M.S. serves as an excellent foundation for pursuing D.E.M.S. (Diploma)
                             or B.E.M.S. (Bachelor's) programs. It helps you understand if this field is right for you
                             before committing to longer programs.
                         </AccordionContent>
                     </AccordionItem>
-                    <AccordionItem value="faq3">
-                        <AccordionTrigger>Is the program suitable for working professionals?</AccordionTrigger>
-                        <AccordionContent>
+                    <AccordionItem value="faq3" className="border-black/10">
+                        <AccordionTrigger className="hover:text-primary hover:no-underline">Is the program suitable for working professionals?</AccordionTrigger>
+                        <AccordionContent className="text-secondary-foreground/80">
                             Yes! The 6-month duration and flexible learning options make C.E.M.S. suitable for working
                             professionals. We offer weekend batches and flexible scheduling to accommodate your needs.
                         </AccordionContent>
                     </AccordionItem>
-                    <AccordionItem value="faq4">
-                        <AccordionTrigger>Will I receive a certificate after completion?</AccordionTrigger>
-                        <AccordionContent>
+                    <AccordionItem value="faq4" className="border-black/10">
+                        <AccordionTrigger className="hover:text-primary hover:no-underline">Will I receive a certificate after completion?</AccordionTrigger>
+                        <AccordionContent className="text-secondary-foreground/80">
                             Yes, upon successful completion of the program and passing the final assessment, you will
                             receive an official Certificate in Electro-Homeopathy Medicine from Wadeh Medical College.
                         </AccordionContent>
                     </AccordionItem>
-                    <AccordionItem value="faq5">
-                        <AccordionTrigger>What is the class schedule like?</AccordionTrigger>
-                        <AccordionContent>
+                    <AccordionItem value="faq5" className="border-black/10">
+                        <AccordionTrigger className="hover:text-primary hover:no-underline">What is the class schedule like?</AccordionTrigger>
+                        <AccordionContent className="text-secondary-foreground/80">
                             We offer flexible batches including weekday and weekend options. Classes typically run
                             2-3 hours per session, 3-4 days per week. Exact schedules are shared during admission counseling.
                         </AccordionContent>

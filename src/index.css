@@ -24,9 +24,9 @@
     --primary: 155 45% 18%;
     --primary-foreground: 40 30% 96%;
 
-    /* Warm Amber */
-    --secondary: 38 90% 55%;
-    --secondary-foreground: 155 40% 12%;
+    /* Soft Emerald */
+    --secondary: 154 40% 50%;
+    --secondary-foreground: 155 40% 8%;
 
     /* Terracotta Accent */
     --accent: 16 80% 58%;
@@ -52,8 +52,8 @@
 
     /* Typography */
     --font-sans: "Outfit", ui-sans-serif, system-ui, -apple-system, sans-serif;
-    --font-display: "Bricolage Grotesque", "Outfit", ui-sans-serif, system-ui,
-      sans-serif;
+    --font-display:
+      "Bricolage Grotesque", "Outfit", ui-sans-serif, system-ui, sans-serif;
     --font-serif: "Bricolage Grotesque", ui-serif, Georgia, serif;
     --font-mono: "Space Mono", ui-monospace, monospace;
 
@@ -528,7 +528,8 @@
 
   /* Card Lift Effect */
   .card-lift {
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    transition:
+      transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
       box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
@@ -562,7 +563,9 @@
   .animate-on-scroll {
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    transition:
+      opacity 0.8s ease-out,
+      transform 0.8s ease-out;
   }
 
   .animate-on-scroll.visible {
@@ -665,4 +668,21 @@
     transform: translateY(-2px);
     box-shadow: 0 10px 30px hsl(var(--accent) / 0.3);
   }
+}
+
+/* Custom Animation for LTR Marquee */
+@keyframes marquee-ltr {
+  0% {
+    transform: translateX(-100%);
+    left: 0;
+  }
+  100% {
+    transform: translateX(0);
+    left: 100%;
+  }
+}
+
+.animate-marquee-ltr {
+  animation: marquee-ltr 15s linear infinite;
+  position: absolute;
 }

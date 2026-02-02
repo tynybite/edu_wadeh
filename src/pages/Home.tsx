@@ -139,7 +139,7 @@ export default function Home() {
               to="/apply" 
               className="hidden sm:inline-flex items-center gap-1 font-semibold text-secondary hover:text-accent transition-colors group"
             >
-              Enroll until 05/03/2026
+              Enroll until {branding.admissionDeadline}
               <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
@@ -148,7 +148,7 @@ export default function Home() {
         {/* Hero Content */}
         <motion.div 
           style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
-          className="relative z-10 container pt-20 md:pt-28 lg:pt-36 pb-16"
+          className="relative z-10 container pt-8 md:pt-16 lg:pt-20 pb-16"
         >
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
             {/* Left: Text Content */}
@@ -236,7 +236,7 @@ export default function Home() {
                       {[1, 2, 3, 4, 5].map((i) => (
                         <Star key={i} className="h-4 w-4 fill-secondary text-secondary" />
                       ))}
-                      <span className="ml-1">4.8</span>
+                      <span className="ml-1">50</span>
                     </div>
                     <p className="text-muted-foreground mt-0.5">High Rated Faculties</p>
                   </div>
@@ -318,7 +318,7 @@ export default function Home() {
                       initial={{ opacity: 0, scale: 0 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 1.5, type: "spring" }}
-                      className="absolute -top-6 -right-6 bg-card/95 backdrop-blur-xl rounded-2xl px-5 py-3 shadow-xl border border-border/50"
+                      className="absolute -top-12 -right-8 bg-card/95 backdrop-blur-xl rounded-2xl px-5 py-3 shadow-xl border border-border/50"
                     >
                       <div className="flex items-center gap-3">
                         <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse" />
@@ -332,7 +332,7 @@ export default function Home() {
                       initial={{ opacity: 0, scale: 0 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 1.7, type: "spring" }}
-                      className="absolute -bottom-8 -left-8 bg-card/95 backdrop-blur-xl rounded-2xl px-6 py-4 shadow-xl border border-border/50"
+                      className="absolute -bottom-16 -left-12 bg-card/95 backdrop-blur-xl rounded-2xl px-6 py-4 shadow-xl border border-border/50"
                     >
                       <div className="flex items-center gap-4">
                         <div className="w-14 h-14 rounded-xl bg-accent/20 flex items-center justify-center">
@@ -680,7 +680,7 @@ export default function Home() {
       {/* ================================================================
           STIPEND BANNER
           ================================================================ */}
-      <section className="py-24 md:py-32 bg-gradient-to-br from-secondary via-accent to-secondary relative overflow-hidden">
+      <section className="py-24 md:py-32 bg-gradient-to-br from-primary via-primary/95 to-primary relative overflow-hidden">
         <div className="absolute inset-0 grain pointer-events-none opacity-20" />
         <motion.div
           animate={{ x: [-100, 100, -100] }}
@@ -776,7 +776,7 @@ export default function Home() {
             </Reveal>
             <Reveal delay={0.1}>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-black text-foreground mt-4">
-                From Our <GradientText>Blog</GradientText>
+                Latest <GradientText>News</GradientText>
               </h2>
             </Reveal>
           </div>
@@ -857,7 +857,7 @@ export default function Home() {
               <MagneticButton>
                 <Button size="lg" asChild className="group text-lg px-12 py-7 bg-accent hover:bg-accent text-accent-foreground font-bold rounded-2xl shadow-2xl shadow-accent/30">
                   <Link to="/apply">
-                    Apply Now — Deadline: 05/03/2026
+                    Apply Now — Deadline: {branding.admissionDeadline}
                     <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-2 transition-transform" />
                   </Link>
                 </Button>

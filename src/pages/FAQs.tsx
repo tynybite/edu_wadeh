@@ -43,15 +43,14 @@ export default function FAQs() {
   return (
     <Layout>
       {/* Hero */}
-      <section className="bg-secondary py-12 md:py-16">
+      <section className="bg-primary py-12 md:py-16">
         <div className="container">
           <div className="max-w-3xl">
-            <Badge className="mb-4">Help Center</Badge>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-secondary-foreground mb-4">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-4">
               Frequently Asked Questions
             </h1>
-            <p className="text-lg text-secondary-foreground/80 mb-6">
-              Find answers to common questions about our programs, admissions, and more
+            <p className="text-lg text-primary-foreground/80 mb-6">
+              Find answers to common questions about admissions, courses, and campus life
             </p>
             <div className="relative max-w-lg">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />

@@ -65,14 +65,14 @@ export default function Courses() {
   return (
     <Layout>
       {/* Hero */}
-      <section className="bg-secondary py-12 md:py-16">
+      <section className="bg-primary py-12 md:py-16">
         <div className="container">
           <div className="max-w-3xl">
-            <Badge className="mb-4">Explore Our Programs</Badge>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-secondary-foreground mb-4">
+            <Badge className="mb-4 bg-white/20 text-white border-0 hover:bg-white/30">Explore Our Programs</Badge>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-4">
               Find Your Perfect Program
             </h1>
-            <p className="text-lg text-secondary-foreground/80">
+            <p className="text-lg text-primary-foreground/80">
               Discover comprehensive Electro-Homeopathy programs designed to launch your healthcare career
             </p>
           </div>

@@ -33,10 +33,10 @@ export const contactInfo = {
 export const branding = {
   name: "Wadeh Medical College & Hospital",
   shortName: "WMCH",
-  tagline: "Discover, Heal, and Thrive—Naturally!",
+  tagline: "Revive, Restore, Renew.",
   logo: "/placeholder.svg",
   accreditations: ["UGC-entitled", "NAAC A+", "AICTE"],
   admissionOpen: true,
   admissionYear: 2026,
-  admissionDeadline: "05/03/2026"
+  admissionDeadline: "06/05/2026"
 };

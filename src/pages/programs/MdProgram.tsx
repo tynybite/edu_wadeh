@@ -37,9 +37,7 @@ export default function MdProgram() {
       <section className="bg-gradient-to-br from-primary via-primary to-primary/90 text-primary-foreground py-16 md:py-24">
         <div className="container">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-4 bg-secondary text-secondary-foreground">
-              UGC-entitled • NAAC A+ • Research-Focused
-            </Badge>
+            <Badge className="mb-4 bg-white/20 text-white border-0">Advanced Specialization • Master's Level</Badge>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               Master of Electro-Homeopathy Medicine
             </h1>
@@ -123,33 +121,29 @@ export default function MdProgram() {
       </Section>
 
       {/* Program Overview */}
-      <Section className="bg-secondary">
+      <Section className="bg-primary text-primary-foreground">
         <SectionHeader
           title="Program Overview"
           subtitle="Advanced specialization in Electro-Homeopathy"
+          variant="inverted"
         />
         <div className="grid gap-8 lg:grid-cols-2">
           <div>
-            <h3 className="text-2xl font-bold mb-4">About M.D. Program</h3>
-            <p className="text-muted-foreground mb-4">
-              The Master of Electro-Homeopathy Medicine (M.D.) is an advanced
-              2-year postgraduate program designed for qualified practitioners
-              seeking deeper specialization in Electro-Homeopathy. This program
-              emphasizes research methodology, advanced therapeutics, and
-              clinical leadership.
+            <h3 className="text-2xl font-bold mb-4">About M.D. (E.H)</h3>
+            <p className="text-primary-foreground/80 mb-4">
+              The Doctor of Medicine in Electro-Homeopathy (M.D.) is a 2-year postgraduate program
+              designed for practitioners seeking advanced knowledge and specialization.
             </p>
-            <p className="text-muted-foreground mb-4">
+            <p className="text-primary-foreground/80 mb-4">
+              This advanced program focuses on specialized treatments, complex case management,
+              and research methodologies in Electro-Homeopathy.
+            </p>
+            <div className="flex flex-wrap gap-2 mt-6">
               Students engage in cutting-edge research, develop advanced
               clinical skills, and prepare for leadership roles in healthcare,
               academia, and research institutions. The program combines rigorous
               academic study with practical clinical experience and independent
               research.
-            </p>
-            <div className="flex flex-wrap gap-2 mt-6">
-              <Badge variant="secondary">Advanced Therapeutics</Badge>
-              <Badge variant="secondary">Research Methodology</Badge>
-              <Badge variant="secondary">Clinical Leadership</Badge>
-              <Badge variant="secondary">Academic Excellence</Badge>
             </div>
           </div>
           <div>
@@ -166,7 +160,7 @@ export default function MdProgram() {
                 "Specialized treatment protocols",
               ].map((item, index) => (
                 <li key={index} className="flex items-start gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -381,57 +375,57 @@ export default function MdProgram() {
       </Section>
 
       {/* FAQs */}
-      <Section>
+      <Section className="bg-secondary text-secondary-foreground">
         <SectionHeader
           title="Frequently Asked Questions"
           subtitle="Common questions about M.D. program"
         />
         <Accordion type="single" collapsible className="w-full">
-          <AccordionItem value="faq1">
-            <AccordionTrigger>
+          <AccordionItem value="faq1" className="border-black/10">
+            <AccordionTrigger className="hover:text-primary hover:no-underline">
               Who should pursue M.D. in Electro-Homeopathy?
             </AccordionTrigger>
-            <AccordionContent>
+            <AccordionContent className="text-secondary-foreground/80">
               M.D. is ideal for B.E.M.S. graduates who want to specialize,
               engage in research, pursue academic careers, or become advanced
               specialists in clinical practice.
             </AccordionContent>
           </AccordionItem>
-          <AccordionItem value="faq2">
-            <AccordionTrigger>
+          <AccordionItem value="faq2" className="border-black/10">
+            <AccordionTrigger className="hover:text-primary hover:no-underline">
               Is clinical experience required for admission?
             </AccordionTrigger>
-            <AccordionContent>
+            <AccordionContent className="text-secondary-foreground/80">
               While clinical experience is preferred and valued, it is not
               mandatory. However, candidates with practical experience may have
               an advantage during the selection process.
             </AccordionContent>
           </AccordionItem>
-          <AccordionItem value="faq3">
-            <AccordionTrigger>
+          <AccordionItem value="faq3" className="border-black/10">
+            <AccordionTrigger className="hover:text-primary hover:no-underline">
               What research opportunities are available?
             </AccordionTrigger>
-            <AccordionContent>
+            <AccordionContent className="text-secondary-foreground/80">
               Students can engage in clinical trials, epidemiological studies,
               therapeutic research, and collaborative projects with hospitals
               and research institutions. Publication support is also provided.
             </AccordionContent>
           </AccordionItem>
-          <AccordionItem value="faq4">
-            <AccordionTrigger>
+          <AccordionItem value="faq4" className="border-black/10">
+            <AccordionTrigger className="hover:text-primary hover:no-underline">
               Can I practice while pursuing M.D.?
             </AccordionTrigger>
-            <AccordionContent>
+            <AccordionContent className="text-secondary-foreground/80">
               The M.D. program is full-time and requires dedicated commitment to
               coursework and research. However, students gain extensive clinical
               experience through the program's practical components.
             </AccordionContent>
           </AccordionItem>
-          <AccordionItem value="faq5">
-            <AccordionTrigger>
+          <AccordionItem value="faq5" className="border-black/10">
+            <AccordionTrigger className="hover:text-primary hover:no-underline">
               Are there teaching opportunities after M.D.?
             </AccordionTrigger>
-            <AccordionContent>
+            <AccordionContent className="text-secondary-foreground/80">
               Yes! M.D. graduates are qualified to teach at medical colleges and
               institutions. We also provide teaching methodology training as
               part of the curriculum.

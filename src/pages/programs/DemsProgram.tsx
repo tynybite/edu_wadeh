@@ -26,7 +26,7 @@ export default function DemsProgram() {
             <section className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground py-16 md:py-24">
                 <div className="container">
                     <div className="max-w-4xl mx-auto text-center">
-                        <Badge className="mb-4 bg-secondary text-secondary-foreground">Recognized Diploma • Quick Start</Badge>
+                        <Badge className="mb-4 bg-white/20 text-white border-0">Recognized Diploma • Quick Start</Badge>
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
                             Diploma in Electro-Homeopathy Medicine & Surgery
                         </h1>
@@ -94,23 +94,24 @@ export default function DemsProgram() {
             </Section>
 
             {/* Program Overview */}
-            <Section className="bg-secondary">
+            <Section className="bg-primary text-primary-foreground">
                 <SectionHeader
                     title="Program Overview"
                     subtitle="Fast-track your career with practical training"
+                    variant="inverted"
                 />
                 <div className="grid gap-8 lg:grid-cols-2">
                     <div>
                         <h3 className="text-2xl font-bold mb-4">About D.E.M.S.</h3>
-                        <p className="text-muted-foreground mb-4">
-                            The Diploma in Electro-Homeopathy Medicine & Surgery (D.E.M.S.) is a 2-year professional
-                            program designed for students who want to enter the healthcare field quickly. This diploma
-                            provides foundational knowledge and practical skills needed to become a certified practitioner.
+                        <p className="text-primary-foreground/80 mb-4">
+                            The Diploma in Electro-Homeopathy Medicine & Surgery (D.E.M.S.) is a 2-year
+                            comprehensive diploma program designed for students who want to start their
+                            career in alternative medicine quickly.
                         </p>
-                        <p className="text-muted-foreground mb-4">
-                            With a strong emphasis on practical training and patient interaction, D.E.M.S. graduates
-                            are well-prepared to manage OPD clinics, provide patient counseling, and deliver basic
-                            clinical care. The program also serves as a pathway to advanced degree programs.
+                        <p className="text-primary-foreground/80 mb-4">
+                            This program focuses on the practical application of Electro-Homeopathy principles,
+                            diagnosis, and treatment methods. It provides a solid foundation in medical sciences
+                            along with specialized training in Electro-Homeopathy remedies and their applications.
                         </p>
                         <div className="flex flex-wrap gap-2 mt-6">
                             <Badge variant="secondary">Quick Start</Badge>
@@ -133,7 +134,7 @@ export default function DemsProgram() {
                                 "Professional ethics and practice"
                             ].map((item, index) => (
                                 <li key={index} className="flex items-start gap-2">
-                                    <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                                    <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
                                     <span>{item}</span>
                                 </li>
                             ))}
@@ -241,8 +242,9 @@ export default function DemsProgram() {
             {/* Career Outcomes */}
             <Section>
                 <SectionHeader
-                    title="Career Outcomes"
-                    subtitle="What you can achieve after D.E.M.S."
+                    title="Career Opportunities"
+                    subtitle="Where your diploma can take you"
+                    variant="inverted"
                 />
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     {[
@@ -333,44 +335,44 @@ export default function DemsProgram() {
             </Section>
 
             {/* FAQs */}
-            <Section>
+            <Section className="bg-secondary text-secondary-foreground">
                 <SectionHeader
                     title="Frequently Asked Questions"
                     subtitle="Common questions about D.E.M.S. program"
                 />
                 <Accordion type="single" collapsible className="w-full">
-                    <AccordionItem value="faq1">
-                        <AccordionTrigger>Is D.E.M.S. recognized for practice?</AccordionTrigger>
-                        <AccordionContent>
+                    <AccordionItem value="faq1" className="border-black/10">
+                        <AccordionTrigger className="hover:text-primary hover:no-underline">Is D.E.M.S. recognized for practice?</AccordionTrigger>
+                        <AccordionContent className="text-secondary-foreground/80">
                             Yes, D.E.M.S. is a recognized diploma that qualifies you to practice as a certified
                             Electro-Homeopathy practitioner. Graduates can open their own clinics or work in healthcare facilities.
                         </AccordionContent>
                     </AccordionItem>
-                    <AccordionItem value="faq2">
-                        <AccordionTrigger>Can I pursue B.E.M.S. after D.E.M.S.?</AccordionTrigger>
-                        <AccordionContent>
+                    <AccordionItem value="faq2" className="border-black/10">
+                        <AccordionTrigger className="hover:text-primary hover:no-underline">Can I pursue B.E.M.S. after D.E.M.S.?</AccordionTrigger>
+                        <AccordionContent className="text-secondary-foreground/80">
                             Absolutely! D.E.M.S. graduates can pursue B.E.M.S. Many institutions offer credit transfer
                             or lateral entry options for diploma holders, potentially reducing the duration of the degree program.
                         </AccordionContent>
                     </AccordionItem>
-                    <AccordionItem value="faq3">
-                        <AccordionTrigger>Do I need a science background?</AccordionTrigger>
-                        <AccordionContent>
+                    <AccordionItem value="faq3" className="border-black/10">
+                        <AccordionTrigger className="hover:text-primary hover:no-underline">Do I need a science background?</AccordionTrigger>
+                        <AccordionContent className="text-secondary-foreground/80">
                             While a science background is preferred, it is not mandatory. Students from any stream
                             who have completed 10+2 can apply. We provide foundational courses to help all students succeed.
                         </AccordionContent>
                     </AccordionItem>
-                    <AccordionItem value="faq4">
-                        <AccordionTrigger>What is the difference between D.E.M.S. and B.E.M.S.?</AccordionTrigger>
-                        <AccordionContent>
+                    <AccordionItem value="faq4" className="border-black/10">
+                        <AccordionTrigger className="hover:text-primary hover:no-underline">What is the difference between D.E.M.S. and B.E.M.S.?</AccordionTrigger>
+                        <AccordionContent className="text-secondary-foreground/80">
                             D.E.M.S. is a 2-year diploma with practical focus, while B.E.M.S. is a 4-year degree with
                             more comprehensive theoretical and clinical training. D.E.M.S. is ideal for faster entry into
                             practice, while B.E.M.S. provides deeper expertise and more career opportunities.
                         </AccordionContent>
                     </AccordionItem>
-                    <AccordionItem value="faq5">
-                        <AccordionTrigger>Are there internship opportunities?</AccordionTrigger>
-                        <AccordionContent>
+                    <AccordionItem value="faq5" className="border-black/10">
+                        <AccordionTrigger className="hover:text-primary hover:no-underline">Are there internship opportunities?</AccordionTrigger>
+                        <AccordionContent className="text-secondary-foreground/80">
                             Yes! The program includes a 6-month clinical internship where you'll gain hands-on experience
                             in our affiliated hospitals and clinics under expert supervision.
                         </AccordionContent>

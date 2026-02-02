@@ -36,9 +36,7 @@ export default function PhdProgram() {
       <section className="bg-gradient-to-br from-primary via-primary to-primary/90 text-primary-foreground py-16 md:py-24">
         <div className="container">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-4 bg-secondary text-secondary-foreground">
-              Research Excellence • Doctorate Level
-            </Badge>
+            <Badge className="mb-4 bg-white/20 text-white border-0">Research • Doctoral Level</Badge>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               Ph.D. in Electro-Homeopathy
             </h1>
@@ -110,21 +108,22 @@ export default function PhdProgram() {
       </Section>
 
       {/* Program Overview */}
-      <Section className="bg-secondary">
+      <Section className="bg-primary text-primary-foreground">
         <SectionHeader
           title="Program Overview"
           subtitle="Pioneering research in Electro-Homeopathy"
+          variant="inverted"
         />
         <div className="grid gap-8 lg:grid-cols-2">
           <div>
-            <h3 className="text-2xl font-bold mb-4">About Ph.D. Program</h3>
-            <p className="text-muted-foreground mb-4">
-              The Doctor of Philosophy (Ph.D.) in Electro-Homeopathy is a premier research-based program designed for
-              scholars and practitioners who wish to contribute original knowledge to the field.
+            <h3 className="text-2xl font-bold mb-4">About Ph.D.</h3>
+            <p className="text-primary-foreground/80 mb-4">
+              The Ph.D. in Electro-Homeopathy is a research-intensive doctoral program
+              designed for scholars and practitioners who wish to contribute new knowledge to the field.
             </p>
-            <p className="text-muted-foreground mb-4">
-              Candidates will engage in advanced study and research under the guidance of experienced guides, working
-              towards a dissertation that addresses key challenges or explores new frontiers in Electro-Homeopathy medicine.
+            <p className="text-primary-foreground/80 mb-4">
+              Candidates will conduct original research, publish papers, and defend a thesis
+              under the guidance of experienced mentors.
             </p>
             <div className="flex flex-wrap gap-2 mt-6">
               <Badge variant="secondary">Research</Badge>
@@ -145,7 +144,7 @@ export default function PhdProgram() {
                 "Standardization of Protocols",
               ].map((item, index) => (
                 <li key={index} className="flex items-start gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -155,27 +154,27 @@ export default function PhdProgram() {
       </Section>
 
       {/* FAQs */}
-      <Section>
+      <Section className="bg-secondary text-secondary-foreground">
         <SectionHeader
           title="Frequently Asked Questions"
           subtitle="Common questions about the Ph.D. program"
         />
         <Accordion type="single" collapsible className="w-full">
-          <AccordionItem value="faq1">
-            <AccordionTrigger>What is the duration of the Ph.D. program?</AccordionTrigger>
-            <AccordionContent>
+          <AccordionItem value="faq1" className="border-black/10">
+            <AccordionTrigger className="hover:text-primary hover:no-underline">What is the duration of the Ph.D. program?</AccordionTrigger>
+            <AccordionContent className="text-secondary-foreground/80">
               The minimum duration is 3 years, including coursework and research. It can be extended based on the progress of your research work.
             </AccordionContent>
           </AccordionItem>
-          <AccordionItem value="faq2">
-            <AccordionTrigger>What is the fee structure?</AccordionTrigger>
-            <AccordionContent>
+          <AccordionItem value="faq2" className="border-black/10">
+            <AccordionTrigger className="hover:text-primary hover:no-underline">What is the fee structure?</AccordionTrigger>
+            <AccordionContent className="text-secondary-foreground/80">
               The fee structure varies based on the research area and duration. Please contact our admissions office for detailed fee information.
             </AccordionContent>
           </AccordionItem>
-          <AccordionItem value="faq3">
-            <AccordionTrigger>Is there an entrance exam?</AccordionTrigger>
-            <AccordionContent>
+          <AccordionItem value="faq3" className="border-black/10">
+            <AccordionTrigger className="hover:text-primary hover:no-underline">Is there an entrance exam?</AccordionTrigger>
+            <AccordionContent className="text-secondary-foreground/80">
               Yes, admission is subject to qualifying in the entrance examination followed by an interview and research proposal presentation.
             </AccordionContent>
           </AccordionItem>

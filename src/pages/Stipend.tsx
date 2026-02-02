@@ -30,20 +30,17 @@ export default function Stipend() {
   return (
     <Layout>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-accent/90 to-primary py-16 md:py-24">
+      <section className="bg-primary py-12 md:py-16">
         <div className="container">
-          <div className="max-w-3xl text-primary-foreground">
-            <Badge className="mb-4 bg-secondary text-secondary-foreground">After Degree Program</Badge>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              {stipendProgram.subtitle}
+          <div className="max-w-3xl">
+            <Badge className="mb-4 bg-white/20 text-white border-0">After Degree Program</Badge>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-4">
+              Monthly Stipend Program
             </h1>
-            <p className="text-xl opacity-90 mb-6">
-              {stipendProgram.title}
+            <p className="text-lg text-primary-foreground/80">
+              Earn while you learn and serve. Get financial support during your internship.
             </p>
-            <p className="text-lg opacity-80 mb-8">
-              {stipendProgram.description}
-            </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-4 mt-8">
               <Button size="lg" variant="secondary" asChild>
                 <Link to="/apply">Apply for Stipend Program</Link>
               </Button>
@@ -153,13 +150,13 @@ export default function Stipend() {
       </Section>
 
       {/* CTA */}
-      <Section className="bg-gradient-to-r from-primary to-secondary text-primary-foreground">
+      <Section className="bg-primary text-primary-foreground">
         <div className="text-center max-w-3xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            "Best for your future" — "A new system revolution!"
+            Ready to Start Your Career?
           </h2>
           <p className="text-lg opacity-90 mb-8">
-            Start earning while learning with our Junior Medical Staff program
+            Join our programs and secure your future with our stipend support
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Button size="lg" variant="secondary" asChild>

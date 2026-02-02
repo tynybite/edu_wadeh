@@ -37,7 +37,7 @@ export const courses: Course[] = [
     specializations: ["Electro-Homeopathy", "Patient Care", "Community Health"],
     badges: ["UGC-entitled", "NAAC A+"],
     ctaLabel: "Explore Program",
-    description: "A comprehensive 4-year program that trains students in the principles and practice of Electro-Homeopathy, combining traditional healing with modern medical knowledge.",
+    description: "A comprehensive 4.5-year program that trains students in the principles and practice of Electro-Homeopathy, combining traditional healing with modern medical knowledge.",
     eligibility: ["10+2 with PCB (Physics, Chemistry, Biology)", "Minimum 50% aggregate marks", "Valid ID proof (Aadhar/Voter Card)"],
     outcomes: ["Licensed Electro-Homeopathy Practitioner", "Clinical Treatment Expertise", "Patient Care Management", "Research & Documentation Skills"],
     featured: true
@@ -128,7 +128,7 @@ export const courses: Course[] = [
 ];
 
 export const degreeTypes = [
-  { id: "BEMS", label: "Bachelor's", description: "4-year undergraduate program" },
+  { id: "BEMS", label: "Bachelor's", description: "4.5-year undergraduate program" },
   { id: "MD", label: "Master's", description: "2-year postgraduate program" },
   { id: "DEMS", label: "Diploma", description: "2-year professional diploma" },
   { id: "CEMS", label: "Certificate", description: "6-month foundation course" },

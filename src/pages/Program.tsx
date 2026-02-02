@@ -55,30 +55,26 @@ export default function Program() {
   return (
     <Layout>
       {/* Hero */}
-      <section className="bg-secondary py-8 md:py-12">
+      <section className="bg-primary py-8 md:py-12">
         <div className="container">
-          <Link to="/courses" className="inline-flex items-center text-secondary-foreground/70 hover:text-secondary-foreground mb-4">
+          <Link to="/courses" className="inline-flex items-center text-primary-foreground/70 hover:text-primary-foreground mb-4">
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to All Programs
+            Back to Programs
           </Link>
 
           <div className="grid lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
-              <div className="flex flex-wrap gap-2 mb-4">
-                {course.tags.map((tag) => (
-                  <Badge key={tag}>{tag}</Badge>
-                ))}
-              </div>
-              
-              <h1 className="text-3xl md:text-4xl font-bold text-secondary-foreground mb-4">
+              <Badge className="mb-4 bg-white/20 text-white border-0">{course.degreeType}</Badge>
+
+              <h1 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-4">
                 {course.title}
               </h1>
-              
-              <p className="text-lg text-secondary-foreground/80 mb-6">
+
+              <p className="text-lg text-primary-foreground/80 mb-6">
                 {course.description}
               </p>
 
-              <div className="flex flex-wrap gap-6 text-secondary-foreground">
+              <div className="flex flex-wrap gap-6 text-primary-foreground">
                 <div className="flex items-center gap-2">
                   <Clock className="h-5 w-5" />
                   <span>{course.durationDisplay || `${course.durationMonths} months`}</span>
@@ -105,7 +101,7 @@ export default function Program() {
                     <span className="text-muted-foreground">Tuition Fee</span>
                     <span className="text-2xl font-bold">{course.tuitionDisplay ? `₹ ${course.tuitionDisplay}` : `₹${course.tuitionINR.toLocaleString("en-IN")}`}</span>
                   </div>
-                  
+
                   <div className="space-y-3">
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Duration</span>
@@ -183,7 +179,7 @@ export default function Program() {
                   ))}
                 </ul>
               </div>
-              
+
               <div>
                 <h3 className="text-xl font-bold mb-4">Specializations</h3>
                 <div className="flex flex-wrap gap-2">

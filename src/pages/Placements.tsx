@@ -68,10 +68,10 @@ export default function Placements() {
   return (
     <Layout>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-primary to-secondary py-16 md:py-24">
+      <section className="bg-primary py-16 md:py-24">
         <div className="container">
           <div className="max-w-3xl text-primary-foreground">
-            <Badge className="mb-4 bg-accent text-accent-foreground">Career Support</Badge>
+            <Badge className="mb-4 bg-white/20 text-white border-0 hover:bg-white/30">Career Support</Badge>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               Experience 100% Placement Assistance For Your Career Success
             </h1>
@@ -188,7 +188,7 @@ export default function Placements() {
       </Section>
 
       {/* CTA */}
-      <Section className="bg-secondary text-secondary-foreground">
+      <Section className="bg-primary text-primary-foreground">
         <div className="text-center max-w-3xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Ready to Launch Your Healthcare Career?
@@ -196,7 +196,7 @@ export default function Placements() {
           <p className="text-lg opacity-90 mb-8">
             Join WMCH and get access to our comprehensive placement assistance program
           </p>
-          <Button size="lg" asChild>
+          <Button size="lg" variant="secondary" asChild>
             <Link to="/apply">
               Apply Now
               <ArrowRight className="ml-2 h-4 w-4" />

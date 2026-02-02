@@ -25,13 +25,13 @@ export default function BemsProgram() {
             <section className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground py-16 md:py-24">
                 <div className="container">
                     <div className="max-w-4xl mx-auto text-center">
-                        <Badge className="mb-4 bg-secondary text-secondary-foreground">UGC-entitled • NAAC A+ Accredited</Badge>
+                        <Badge className="mb-4 bg-white/20 text-white border-0">Admissions Open 2026</Badge>
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
                             Bachelor of Electro-Homeopathy Medicine & Surgery
                         </h1>
                         <p className="text-xl md:text-2xl mb-4 opacity-90">B.E.M.S.</p>
                         <p className="text-lg mb-8 opacity-80 max-w-2xl mx-auto">
-                            Launch your healthcare career with a comprehensive 4-year undergraduate program that combines
+                            Launch your healthcare career with a comprehensive 4.5-year undergraduate program that combines
                             traditional Electro-Homeopathy principles with modern medical knowledge.
                         </p>
                         <div className="flex flex-wrap gap-4 justify-center">
@@ -55,8 +55,8 @@ export default function BemsProgram() {
                             <Clock className="h-4 w-4 text-muted-foreground" />
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold">4 Years</div>
-                            <p className="text-xs text-muted-foreground">48 months full-time</p>
+                            <div className="text-2xl font-bold">4.5 Years</div>
+                            <p className="text-xs text-muted-foreground">54 months full-time</p>
                         </CardContent>
                     </Card>
                     <Card>
@@ -93,21 +93,22 @@ export default function BemsProgram() {
             </Section>
 
             {/* Program Overview */}
-            <Section className="bg-secondary">
+            <Section className="bg-primary text-primary-foreground">
                 <SectionHeader
                     title="Program Overview"
                     subtitle="A comprehensive foundation in Electro-Homeopathy medicine"
+                    variant="inverted"
                 />
                 <div className="grid gap-8 lg:grid-cols-2">
                     <div>
                         <h3 className="text-2xl font-bold mb-4">About B.E.M.S.</h3>
-                        <p className="text-muted-foreground mb-4">
+                        <p className="text-primary-foreground/80 mb-4">
                             The Bachelor of Electro-Homeopathy Medicine & Surgery (B.E.M.S.) is a comprehensive
                             4-year undergraduate program designed to train students in the principles and practice
                             of Electro-Homeopathy, a holistic healthcare system that combines traditional healing
                             methods with modern medical knowledge.
                         </p>
-                        <p className="text-muted-foreground mb-4">
+                        <p className="text-primary-foreground/80 mb-4">
                             This program provides students with theoretical knowledge and hands-on clinical experience,
                             preparing them to become licensed Electro-Homeopathy practitioners capable of providing
                             effective patient care and contributing to community health.
@@ -133,7 +134,7 @@ export default function BemsProgram() {
                                 "Professional ethics & practice management"
                             ].map((item, index) => (
                                 <li key={index} className="flex items-start gap-2">
-                                    <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                                    <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
                                     <span>{item}</span>
                                 </li>
                             ))}
@@ -295,44 +296,46 @@ export default function BemsProgram() {
             </Section>
 
             {/* FAQs */}
-            <Section className="bg-secondary">
+        
+            {/* FAQ Section */}
+            <Section className="bg-secondary text-secondary-foreground">
                 <SectionHeader
                     title="Frequently Asked Questions"
                     subtitle="Common questions about B.E.M.S. program"
                 />
                 <Accordion type="single" collapsible className="w-full">
-                    <AccordionItem value="faq1">
-                        <AccordionTrigger>Is B.E.M.S. a recognized degree?</AccordionTrigger>
-                        <AccordionContent>
-                            Yes, B.E.M.S. is a UGC-entitled degree program accredited by NAAC with A+ grade.
-                            Graduates are eligible to practice as licensed Electro-Homeopathy practitioners.
+                    <AccordionItem value="faq1" className="border-black/10">
+                        <AccordionTrigger className="hover:text-primary hover:no-underline">Is B.E.M.S. a recognized degree?</AccordionTrigger>
+                        <AccordionContent className="text-secondary-foreground/80">
+                            Yes, B.E.M.S. is a comprehensive degree program designed to train students in Electro-Homeopathy.
+                            Graduates are eligible to practice as qualified practitioners.
                         </AccordionContent>
                     </AccordionItem>
-                    <AccordionItem value="faq2">
-                        <AccordionTrigger>What is the admission process?</AccordionTrigger>
-                        <AccordionContent>
+                    <AccordionItem value="faq2" className="border-black/10">
+                        <AccordionTrigger className="hover:text-primary hover:no-underline">What is the admission process?</AccordionTrigger>
+                        <AccordionContent className="text-secondary-foreground/80">
                             Admissions are based on merit in the qualifying examination (10+2 with PCB).
                             Candidates need to fill out the online application form and submit required documents.
                             Shortlisted candidates may be called for counseling.
                         </AccordionContent>
                     </AccordionItem>
-                    <AccordionItem value="faq3">
-                        <AccordionTrigger>Are there any scholarships available?</AccordionTrigger>
-                        <AccordionContent>
+                    <AccordionItem value="faq3" className="border-black/10">
+                        <AccordionTrigger className="hover:text-primary hover:no-underline">Are there any scholarships available?</AccordionTrigger>
+                        <AccordionContent className="text-secondary-foreground/80">
                             Yes, we offer merit-based scholarships and also have a stipend program for eligible students.
                             Please visit our Stipend Program page for more details.
                         </AccordionContent>
                     </AccordionItem>
-                    <AccordionItem value="faq4">
-                        <AccordionTrigger>Can I pursue M.D. after B.E.M.S.?</AccordionTrigger>
-                        <AccordionContent>
+                    <AccordionItem value="faq4" className="border-black/10">
+                        <AccordionTrigger className="hover:text-primary hover:no-underline">Can I pursue M.D. after B.E.M.S.?</AccordionTrigger>
+                        <AccordionContent className="text-secondary-foreground/80">
                             Absolutely! B.E.M.S. graduates are eligible to pursue M.D. in Electro-Homeopathy
                             or other postgraduate programs in allied health sciences.
                         </AccordionContent>
                     </AccordionItem>
-                    <AccordionItem value="faq5">
-                        <AccordionTrigger>What are the career opportunities after B.E.M.S.?</AccordionTrigger>
-                        <AccordionContent>
+                    <AccordionItem value="faq5" className="border-black/10">
+                        <AccordionTrigger className="hover:text-primary hover:no-underline">What are the career opportunities after B.E.M.S.?</AccordionTrigger>
+                        <AccordionContent className="text-secondary-foreground/80">
                             Graduates can start their own clinic, work in hospitals, join research organizations,
                             pursue teaching positions, or work in community health programs. The demand for
                             holistic healthcare practitioners is growing rapidly.

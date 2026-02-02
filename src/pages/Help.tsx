@@ -70,15 +70,14 @@ export default function Help() {
   return (
     <Layout>
       {/* Hero */}
-      <section className="bg-secondary py-12 md:py-16">
+      <section className="bg-primary py-12 md:py-16">
         <div className="container">
           <div className="max-w-3xl">
-            <Badge className="mb-4">Help Center</Badge>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-secondary-foreground mb-4">
-              We're Here to Help
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-4">
+              How Can We Help You?
             </h1>
-            <p className="text-lg text-secondary-foreground/80">
-              Have questions? Our dedicated counselors are ready to assist you on your educational journey.
+            <p className="text-lg text-primary-foreground/80">
+              Get support, find answers, and connect with our team
             </p>
           </div>
         </div>
