@@ -23,7 +23,7 @@ const footerLinks = {
     { label: "About Us", href: "/about" },
     { label: "Placements", href: "/placements" },
     { label: "Stipend Program", href: "/stipend" },
-    { label: "Blogs", href: "/blogs" },
+    { label: "News", href: "/news" },
     { label: "FAQs", href: "/faqs" },
     { label: "Help Center", href: "/help" },
   ],

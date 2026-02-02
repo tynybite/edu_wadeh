@@ -13,7 +13,7 @@ import CemsProgram from "./pages/programs/CemsProgram";
 import PhdProgram from "./pages/programs/PhdProgram";
 import Placements from "./pages/Placements";
 import Stipend from "./pages/Stipend";
-import Blogs from "./pages/Blogs";
+import News from "./pages/News";
 import FAQs from "./pages/FAQs";
 import Help from "./pages/Help";
 import Apply from "./pages/Apply";
@@ -38,7 +38,7 @@ const App = () => (
           <Route path="/programs/cems" element={<CemsProgram />} />
           <Route path="/placements" element={<Placements />} />
           <Route path="/stipend" element={<Stipend />} />
-          <Route path="/blogs" element={<Blogs />} />
+          <Route path="/news" element={<News />} />
           <Route path="/faqs" element={<FAQs />} />
           <Route path="/help" element={<Help />} />
           <Route path="/apply" element={<Apply />} />

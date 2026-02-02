@@ -94,7 +94,7 @@ export default function Home() {
         {/* Animated Morphing Blobs */}
         <MorphingBlob 
           className="w-[800px] h-[800px] -top-[200px] -right-[200px] opacity-40"
-          color="hsl(38 90% 55% / 0.15)"
+          color="hsl(142 76% 36% / 0.15)"
         />
         <MorphingBlob 
           className="w-[600px] h-[600px] -bottom-[100px] -left-[200px] opacity-30"
@@ -102,7 +102,7 @@ export default function Home() {
         />
         <MorphingBlob 
           className="w-[400px] h-[400px] top-1/3 left-1/2 opacity-25"
-          color="hsl(16 80% 58% / 0.1)"
+          color="hsl(160 84% 39% / 0.1)"
         />
 
         {/* Grain Overlay */}
@@ -191,7 +191,7 @@ export default function Home() {
                           <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-2 transition-transform duration-300" />
                         </span>
                         <motion.div 
-                          className="absolute inset-0 bg-gradient-to-r from-accent via-orange-500 to-accent"
+                          className="absolute inset-0 bg-gradient-to-r from-emerald-500 via-green-500 to-emerald-500"
                           initial={{ x: "-100%" }}
                           whileHover={{ x: "100%" }}
                           transition={{ duration: 0.6 }}
@@ -415,7 +415,7 @@ export default function Home() {
           PROGRAMS - Interactive Bento Grid
           ================================================================ */}
       <section className="py-24 md:py-32 bg-background relative overflow-hidden">
-        <MorphingBlob className="w-[500px] h-[500px] top-0 right-0 opacity-20" color="hsl(38 90% 55% / 0.1)" />
+        <MorphingBlob className="w-[500px] h-[500px] top-0 right-0 opacity-20" color="hsl(142 76% 36% / 0.1)" />
         
         <div className="container relative z-10">
           {/* Section Header */}
@@ -599,7 +599,7 @@ export default function Home() {
           ================================================================ */}
       <section className="py-24 md:py-32 bg-primary relative overflow-hidden">
         <div className="absolute inset-0 grain pointer-events-none opacity-20" />
-        <MorphingBlob className="w-[600px] h-[600px] -top-[200px] -left-[200px] opacity-20" color="hsl(38 90% 55% / 0.3)" />
+        <MorphingBlob className="w-[600px] h-[600px] -top-[200px] -left-[200px] opacity-20" color="hsl(158 64% 52% / 0.3)" />
         
         <div className="container relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-16">
