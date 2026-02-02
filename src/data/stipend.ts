@@ -47,7 +47,7 @@ export const stipendProgram: StipendProgram = {
     }
   ],
   eligibility: [
-    "Completed B.E.M.S., M.D., D.E.M.S., or C.E.M.S. from WMCH",
+    "Completed B.E.M.S., M.D., or D.E.M.S. from WMCH",
     "Successfully passed all required examinations",
     "Completed hospital onboarding process",
     "Committed to minimum 6-month engagement",

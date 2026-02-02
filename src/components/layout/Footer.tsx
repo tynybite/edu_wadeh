@@ -37,47 +37,47 @@ const footerLinks = {
 
 export function Footer() {
   return (
-    <footer className="bg-secondary text-secondary-foreground">
+    <footer className="bg-emerald-950 text-white">
       {/* Main Footer */}
       <div className="container py-12 md:py-16">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand Column */}
           <div className="space-y-4">
             <Link to="/" className="flex items-center gap-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
-                <GraduationCap className="h-6 w-6 text-primary-foreground" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10">
+                <GraduationCap className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h3 className="font-bold text-lg">{branding.shortName}</h3>
-                <p className="text-xs text-secondary-foreground/70">{branding.tagline}</p>
+                <h3 className="font-bold text-lg text-white">{branding.shortName}</h3>
+                <p className="text-xs text-white/70">{branding.tagline}</p>
               </div>
             </Link>
-            <p className="text-sm text-secondary-foreground/80">
+            <p className="text-sm text-white/80">
               {branding.name} is a premier institution dedicated to excellence in Electro-Homeopathy education and healthcare services.
             </p>
             <div className="flex gap-3">
-              <a href={contactInfo.socialMedia.facebook} className="hover:text-accent transition-colors" aria-label="Facebook">
-                <Facebook className="h-5 w-5" />
+              <a href={contactInfo.socialMedia.facebook} className="hover:text-emerald-200 transition-colors" aria-label="Facebook">
+                <Facebook className="h-5 w-5 text-white" />
               </a>
-              <a href={contactInfo.socialMedia.instagram} className="hover:text-accent transition-colors" aria-label="Instagram">
-                <Instagram className="h-5 w-5" />
+              <a href={contactInfo.socialMedia.instagram} className="hover:text-emerald-200 transition-colors" aria-label="Instagram">
+                <Instagram className="h-5 w-5 text-white" />
               </a>
-              <a href={contactInfo.socialMedia.linkedin} className="hover:text-accent transition-colors" aria-label="LinkedIn">
-                <Linkedin className="h-5 w-5" />
+              <a href={contactInfo.socialMedia.linkedin} className="hover:text-emerald-200 transition-colors" aria-label="LinkedIn">
+                <Linkedin className="h-5 w-5 text-white" />
               </a>
-              <a href={contactInfo.socialMedia.youtube} className="hover:text-accent transition-colors" aria-label="YouTube">
-                <Youtube className="h-5 w-5" />
+              <a href={contactInfo.socialMedia.youtube} className="hover:text-emerald-200 transition-colors" aria-label="YouTube">
+                <Youtube className="h-5 w-5 text-white" />
               </a>
             </div>
           </div>
 
           {/* Programs */}
           <div>
-            <h4 className="font-semibold mb-4">Programs</h4>
+            <h4 className="font-semibold mb-4 text-white">Programs</h4>
             <ul className="space-y-2">
               {footerLinks.programs.map((link) => (
                 <li key={link.label}>
-                  <Link to={link.href} className="text-sm text-secondary-foreground/80 hover:text-accent transition-colors">
+                  <Link to={link.href} className="text-sm text-white/80 hover:text-emerald-200 transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -87,11 +87,11 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-semibold mb-4">Quick Links</h4>
+            <h4 className="font-semibold mb-4 text-white">Quick Links</h4>
             <ul className="space-y-2">
               {footerLinks.quickLinks.map((link) => (
                 <li key={link.label}>
-                  <Link to={link.href} className="text-sm text-secondary-foreground/80 hover:text-accent transition-colors">
+                  <Link to={link.href} className="text-sm text-white/80 hover:text-emerald-200 transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -101,16 +101,16 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="font-semibold mb-4">Contact Us</h4>
-            <ul className="space-y-3 text-sm text-secondary-foreground/80">
+            <h4 className="font-semibold mb-4 text-white">Contact Us</h4>
+            <ul className="space-y-3 text-sm text-white/80">
               <li>
-                <a href={`tel:${contactInfo.phone}`} className="flex items-start gap-2 hover:text-accent transition-colors">
+                <a href={`tel:${contactInfo.phone}`} className="flex items-start gap-2 hover:text-emerald-200 transition-colors">
                   <Phone className="h-4 w-4 mt-0.5 flex-shrink-0" />
                   <span>+91 {contactInfo.phone}</span>
                 </a>
               </li>
               <li>
-                <a href={`mailto:${contactInfo.email}`} className="flex items-start gap-2 hover:text-accent transition-colors">
+                <a href={`mailto:${contactInfo.email}`} className="flex items-start gap-2 hover:text-emerald-200 transition-colors">
                   <Mail className="h-4 w-4 mt-0.5 flex-shrink-0" />
                   <span>{contactInfo.email}</span>
                 </a>
@@ -134,13 +134,13 @@ export function Footer() {
 
 
       {/* Bottom Bar */}
-      <div className="border-t border-secondary-foreground/10">
+      <div className="border-t border-white/10">
         <div className="container py-4">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-secondary-foreground/60">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-white/60">
             <p>© {new Date().getFullYear()} {branding.name}. All rights reserved.</p>
             <div className="flex gap-4">
-              <Link to="/privacy" className="hover:text-secondary-foreground transition-colors">Privacy Policy</Link>
-              <Link to="/terms" className="hover:text-secondary-foreground transition-colors">Terms of Service</Link>
+              <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+              <Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
             </div>
           </div>
         </div>
