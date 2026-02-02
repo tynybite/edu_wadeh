@@ -67,10 +67,10 @@ export function Header() {
       </div>
 
       {/* Main Navigation */}
-      <div className="container flex h-16 items-center justify-between">
+      <div className="container flex h-20 items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-lg">
+          <div className="flex h-[68px] w-[68px] items-center justify-center overflow-hidden rounded-lg">
             <img src="/logo.png" alt={branding.shortName} className="h-full w-full object-contain" />
           </div>
           <div className="hidden sm:block">
@@ -155,7 +155,7 @@ export function Header() {
               </div>
               <div className="flex flex-col gap-4 mt-8">
                 <Link to="/" className="flex items-center gap-2 mb-4">
-                  <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-lg">
+                  <div className="flex h-[68px] w-[68px] items-center justify-center overflow-hidden rounded-lg">
                     <img src="/logo.png" alt={branding.shortName} className="h-full w-full object-contain" />
                   </div>
                   <span className="font-bold text-lg">{branding.shortName}</span>
