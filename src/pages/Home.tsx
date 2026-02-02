@@ -59,10 +59,9 @@ const features = [
 ];
 
 const stats = [
-  { value: 5000, suffix: "+", label: "Learners Empowered" },
+  { value: 50, suffix: "+", label: "Students Placed" },
   { value: 95, suffix: "%", label: "Positive Program ROI" },
   { value: 98, suffix: "%", label: "Student Satisfaction" },
-  { value: 15, suffix: "+", label: "States Reached" },
 ];
 
 export default function Home() {
@@ -155,22 +154,7 @@ export default function Home() {
             {/* Left: Text Content */}
             <div className="space-y-10">
               {/* Accreditation Badge */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-card/80 backdrop-blur-md border border-border/50 shadow-lg"
-              >
-                <div className="flex items-center gap-1.5">
-                  <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                  <span className="text-xs font-bold text-primary uppercase tracking-widest">UGC-Entitled</span>
-                </div>
-                <div className="w-px h-4 bg-border" />
-                <div className="flex items-center gap-1.5">
-                  <Star className="h-3.5 w-3.5 text-secondary fill-secondary" />
-                  <span className="text-xs font-bold text-secondary uppercase tracking-widest">NAAC A+</span>
-                </div>
-              </motion.div>
+
 
               {/* Headline with Split Text */}
               <div className="space-y-2">
@@ -257,7 +241,7 @@ export default function Home() {
                       ))}
                       <span className="ml-1">4.8</span>
                     </div>
-                    <p className="text-muted-foreground mt-0.5">From 500+ reviews</p>
+                    <p className="text-muted-foreground mt-0.5">High Rated Faculties</p>
                   </div>
                 </div>
               </Reveal>
@@ -303,9 +287,9 @@ export default function Home() {
                       <div className="grid grid-cols-2 gap-4">
                         {[
                           { value: "5+", label: "Programs" },
-                          { value: "50+", label: "Faculty" },
-                          { value: "15+", label: "States" },
-                          { value: "98%", label: "Pass Rate" },
+                          { value: "15+", label: "Faculty" },
+                          { value: "50+", label: "Students" },
+                          { value: "100%", label: "Placement Rate" },
                         ].map((stat, i) => (
                           <motion.div
                             key={stat.label}
@@ -341,7 +325,7 @@ export default function Home() {
                     >
                       <div className="flex items-center gap-3">
                         <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse" />
-                        <span className="font-semibold text-foreground">Live Classes</span>
+                        <span className="font-semibold text-foreground">Practical Learning</span>
                       </div>
                     </motion.div>
                   </Floating>

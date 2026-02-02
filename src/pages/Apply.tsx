@@ -78,10 +78,9 @@ const FILE_FIELDS = {
 
 type FileKeys = keyof typeof FILE_FIELDS;
 
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzEYDU1WSxXf2wAtsh2N6bdhjD6jw2BCFOKAQrNpwK_Jg5GKZp6l-tZ4ew3t0tIl0jTxA/exec";
-
-const RAZORPAY_KEY = "rzp_test_YourKeyHere"; // Replace with actual key
-const APPLICATION_FEE = 500;
+const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
+const RAZORPAY_KEY = import.meta.env.VITE_RAZORPAY_KEY;
+const APPLICATION_FEE = Number(import.meta.env.VITE_APPLICATION_FEE) || 500;
 
 const steps = [
   { number: 1, title: "Personal Info", icon: User },
@@ -199,7 +198,7 @@ export default function Apply() {
         contact: formData.phone,
       },
       theme: {
-        color: "#1a4d3e", // Primary color
+        color: "#1a4d3e",
       },
       modal: {
         ondismiss: function() {
