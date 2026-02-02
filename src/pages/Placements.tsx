@@ -16,10 +16,10 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 
 const placementStats = [
-  { value: "2000+", label: "Students Placed", icon: Users },
-  { value: "500+", label: "Job Opportunities", icon: Briefcase },
-  { value: "50+", label: "Hiring Partners", icon: Building2 },
-  { value: "100+", label: "Mock Sessions Annually", icon: Video }
+  { value: "50+", label: "Students Placed", icon: Users },
+  { value: "15+", label: "Hiring Partners", icon: Building2 },
+  { value: "100%", label: "Placement Assistance", icon: Briefcase },
+  { value: "20+", label: "Mock Sessions", icon: Video }
 ];
 
 const placementSteps = [
@@ -138,7 +138,7 @@ export default function Placements() {
             <ul className="space-y-3">
               {[
                 "Professional resume and cover letter writing",
-                "LinkedIn profile optimization",
+
                 "Personal branding workshops",
                 "Communication skills training",
                 "Soft skills development"
@@ -156,7 +156,7 @@ export default function Placements() {
               {[
                 "One-on-one mock interviews",
                 "Group discussion practice",
-                "Technical interview coaching",
+
                 "HR interview preparation",
                 "Video interview tips"
               ].map((item) => (

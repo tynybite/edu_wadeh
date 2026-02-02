@@ -66,7 +66,7 @@ export default function DemsProgram() {
                             <IndianRupee className="h-4 w-4 text-muted-foreground" />
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold">₹80,000</div>
+                            <div className="text-2xl font-bold">₹1,80,000</div>
                             <p className="text-xs text-muted-foreground">Total program cost</p>
                         </CardContent>
                     </Card>

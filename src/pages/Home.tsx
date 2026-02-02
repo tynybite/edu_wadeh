@@ -153,9 +153,6 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
             {/* Left: Text Content */}
             <div className="space-y-10">
-              {/* Accreditation Badge */}
-
-
               {/* Headline with Split Text */}
               <div className="space-y-2">
                 <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-display font-black leading-[0.95] tracking-tight">

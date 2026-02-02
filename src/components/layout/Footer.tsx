@@ -131,18 +131,7 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Accreditation Bar */}
-      <div className="border-t border-secondary-foreground/10 bg-secondary/50">
-        <div className="container py-4">
-          <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-secondary-foreground/60">
-            {branding.accreditations.map((acc) => (
-              <span key={acc} className="px-3 py-1 rounded-full border border-secondary-foreground/20">
-                {acc}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
+
 
       {/* Bottom Bar */}
       <div className="border-t border-secondary-foreground/10">

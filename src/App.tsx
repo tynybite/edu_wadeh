@@ -10,6 +10,7 @@ import BemsProgram from "./pages/programs/BemsProgram";
 import MdProgram from "./pages/programs/MdProgram";
 import DemsProgram from "./pages/programs/DemsProgram";
 import CemsProgram from "./pages/programs/CemsProgram";
+import PhdProgram from "./pages/programs/PhdProgram";
 import Placements from "./pages/Placements";
 import Stipend from "./pages/Stipend";
 import Blogs from "./pages/Blogs";
@@ -32,6 +33,7 @@ const App = () => (
           <Route path="/program/:id" element={<Program />} />
           <Route path="/programs/bems" element={<BemsProgram />} />
           <Route path="/programs/md" element={<MdProgram />} />
+          <Route path="/programs/phd" element={<PhdProgram />} />
           <Route path="/programs/dems" element={<DemsProgram />} />
           <Route path="/programs/cems" element={<CemsProgram />} />
           <Route path="/placements" element={<Placements />} />

@@ -67,10 +67,10 @@ export function Header() {
       </div>
 
       {/* Main Navigation */}
-      <div className="container flex h-20 items-center justify-between">
+      <div className="container flex h-32 items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <div className="flex h-[68px] w-[68px] items-center justify-center overflow-hidden rounded-lg">
+          <div className="flex h-[102px] w-[102px] items-center justify-center overflow-hidden rounded-lg">
             <img src="/logo.png" alt={branding.shortName} className="h-full w-full object-contain" />
           </div>
           <div className="hidden sm:block">
