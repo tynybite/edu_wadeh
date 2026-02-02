@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
+import About from "./pages/About";
 import Courses from "./pages/Courses";
 import Program from "./pages/Program";
 import BemsProgram from "./pages/programs/BemsProgram";
@@ -18,6 +19,7 @@ import FAQs from "./pages/FAQs";
 import Help from "./pages/Help";
 import Apply from "./pages/Apply";
 import NotFound from "./pages/NotFound";
+import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -27,8 +29,10 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/program/:id" element={<Program />} />
           <Route path="/programs/bems" element={<BemsProgram />} />

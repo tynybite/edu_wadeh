@@ -62,6 +62,7 @@ const stats = [
   { value: 50, suffix: "+", label: "Students Placed" },
   { value: 95, suffix: "%", label: "Positive Program ROI" },
   { value: 98, suffix: "%", label: "Student Satisfaction" },
+  { value: 15, suffix: "+", label: "Expert Faculty" },
 ];
 
 export default function Home() {
@@ -655,13 +656,13 @@ export default function Home() {
               <StaggerItem key={testimonial.id}>
                 <motion.div
                   whileHover={{ y: -8 }}
-                  className="h-full bg-card rounded-3xl border border-border/50 p-8 shadow-lg"
+                  className="h-full bg-card rounded-3xl border border-border/50 p-8 shadow-lg flex flex-col"
                 >
                   <Quote className="h-10 w-10 text-secondary/20 mb-6" />
-                  <p className="text-muted-foreground italic leading-relaxed mb-8">
+                  <p className="text-muted-foreground italic leading-relaxed mb-8 flex-grow">
                     "{testimonial.quote}"
                   </p>
-                  <div className="flex items-center gap-4 pt-6 border-t border-border/50">
+                  <div className="flex items-center gap-4 pt-6 border-t border-border/50 mt-auto">
                     <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary via-secondary to-accent flex items-center justify-center text-white text-lg font-bold">
                       {testimonial.name.charAt(0)}
                     </div>
