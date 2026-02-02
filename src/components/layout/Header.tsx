@@ -58,10 +58,15 @@ export function Header() {
               {contactInfo.email}
             </a>
           </div>
-          <div className="flex items-center gap-4">
-            <span className="hidden md:inline text-secondary font-medium">
-              Admissions Open for 2026!
-            </span>
+          <div className="flex-1 overflow-hidden mask-gradient-to-r ml-8">
+            <div className="flex items-center gap-8 animate-marquee whitespace-nowrap">
+              <span className="text-secondary font-medium">Admissions Open for 2026!</span>
+              <span className="text-secondary font-medium">Admissions Open for 2026!</span>
+              <span className="text-secondary font-medium">Admissions Open for 2026!</span>
+              <span className="text-secondary font-medium">Admissions Open for 2026!</span>
+              <span className="text-secondary font-medium">Admissions Open for 2026!</span>
+              <span className="text-secondary font-medium">Admissions Open for 2026!</span>
+            </div>
           </div>
         </div>
       </div>

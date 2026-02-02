@@ -105,15 +105,24 @@ export default function Apply() {
   const { toast } = useToast();
 
   // Load Razorpay script
+  const [isRazorpayLoaded, setIsRazorpayLoaded] = useState(false);
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
     script.async = true;
+    script.onload = () => setIsRazorpayLoaded(true);
+    script.onerror = () => {
+      toast({
+        title: "Error",
+        description: "Failed to load payment system. Please verify your connection.",
+        variant: "destructive"
+      });
+    };
     document.body.appendChild(script);
     return () => {
       document.body.removeChild(script);
     };
-  }, []);
+  }, [toast]);
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -180,39 +189,73 @@ export default function Apply() {
   const handlePayment = () => {
     const formData = form.getValues();
     
-    const options = {
-      key: RAZORPAY_KEY,
-      amount: APPLICATION_FEE * 100, // Razorpay expects paise
-      currency: "INR",
-      name: branding.name,
-      description: "Application Fee",
-      image: "/logo.png",
-      handler: function (response: any) {
-        setPaymentId(response.razorpay_payment_id);
-        setPaymentComplete(true);
-        submitApplication(response.razorpay_payment_id);
-      },
-      prefill: {
-        name: formData.name,
-        email: formData.email,
-        contact: formData.phone,
-      },
-      theme: {
-        color: "#1a4d3e",
-      },
-      modal: {
-        ondismiss: function() {
-          toast({
-            title: "Payment Cancelled",
-            description: "Your application has not been submitted. Please complete payment to proceed.",
-            variant: "destructive"
-          });
-        }
-      }
-    };
+    if (!RAZORPAY_KEY) {
+      toast({
+        title: "Configuration Error",
+        description: "Payment gateway is not configured (Missing Key). Please contact support.",
+        variant: "destructive"
+      });
+      return;
+    }
 
-    const razorpay = new window.Razorpay(options);
-    razorpay.open();
+    if (!isRazorpayLoaded || !window.Razorpay) {
+      toast({
+        title: "Loading",
+        description: "Payment system is initializing. Please try again in a moment.",
+        variant: "default"
+      });
+      return;
+    }
+
+    try {
+      const options = {
+        key: RAZORPAY_KEY,
+        amount: APPLICATION_FEE * 100, // Razorpay expects paise
+        currency: "INR",
+        name: branding.name,
+        description: "Application Fee",
+        image: "/logo.png",
+        handler: function (response: any) {
+          setPaymentId(response.razorpay_payment_id);
+          setPaymentComplete(true);
+          submitApplication(response.razorpay_payment_id);
+        },
+        prefill: {
+          name: formData.name,
+          email: formData.email,
+          contact: formData.phone,
+        },
+        theme: {
+          color: "#059669", // Emerald-600 to match theme
+        },
+        modal: {
+          ondismiss: function() {
+            toast({
+              title: "Payment Cancelled",
+              description: "Your application has not been submitted. Please complete payment to proceed.",
+              variant: "destructive"
+            });
+          }
+        }
+      };
+
+      const razorpay = new window.Razorpay(options);
+      razorpay.on("payment.failed", function (response: any) {
+        toast({
+          title: "Payment Failed",
+          description: response.error.description || "Transaction failed",
+          variant: "destructive"
+        });
+      });
+      razorpay.open();
+    } catch (error) {
+      console.error("Payment initialization error:", error);
+      toast({
+        title: "Error",
+        description: "Could not initialize payment. Please disable ad-blockers and try again.",
+        variant: "destructive"
+      });
+    }
   };
 
   const submitApplication = async (paymentId: string) => {
