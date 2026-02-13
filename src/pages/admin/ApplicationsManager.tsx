@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { adminService, Application } from '@/services/adminService';
+import { adminService, Application, Batch } from '@/services/adminService';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
@@ -7,24 +7,36 @@ import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { FileText, Clock, CheckCircle2, User, Phone, Mail } from 'lucide-react';
+import { FileText, Clock, CheckCircle2, User, Phone, Mail, GraduationCap } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { Input } from '@/components/ui/input';
+import { supabase } from '@/lib/supabase';
 
 export default function ApplicationsManager() {
   const [applications, setApplications] = useState<Application[]>([]);
+  const [batches, setBatches] = useState<Batch[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedApp, setSelectedApp] = useState<Application | null>(null);
+  
+  // Enrollment State
+  const [enrollmentBatch, setEnrollmentBatch] = useState<string>("");
+  const [enrollmentId, setEnrollmentId] = useState<string>("");
+  const [isEnrolling, setIsEnrolling] = useState(false);
 
   useEffect(() => {
-    fetchApplications();
+    fetchData();
   }, []);
 
-  const fetchApplications = async () => {
+  const fetchData = async () => {
     try {
-        const data = await adminService.getApplications();
-        setApplications(data || []);
+        const [appsData, batchesData] = await Promise.all([
+            adminService.getApplications(),
+            adminService.getBatches()
+        ]);
+        setApplications(appsData || []);
+        setBatches(batchesData || []);
     } catch (error: any) {
-      toast.error('Failed to fetch applications');
+      toast.error('Failed to fetch data');
       console.error(error);
     } finally {
       setLoading(false);
@@ -35,9 +47,71 @@ export default function ApplicationsManager() {
       try {
           await adminService.updateApplicationStatus(id, newStatus);
           toast.success(`Status updated to ${newStatus}`);
-          fetchApplications();
+          fetchData(); // Refresh to ensure UI sync
       } catch (error: any) {
           toast.error('Failed to update status');
+      }
+  }
+
+  const handleCreateBatch = async () => {
+      try {
+          const newBatch = await adminService.createBatch({
+              name: `Batch ${new Date().getFullYear()}`,
+              program: 'BEMS',
+              start_date: new Date().toISOString(),
+              end_date: new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString()
+          });
+          setBatches([newBatch, ...batches]);
+          setEnrollmentBatch(newBatch.id);
+          toast.success("Created default batch");
+      } catch (error) {
+          toast.error("Failed to create batch");
+      }
+  }
+
+  const handleEnroll = async () => {
+      if (!selectedApp || !enrollmentBatch) {
+          toast.error("Please select a batch");
+          return;
+      }
+      setIsEnrolling(true);
+      try {
+          // Generate ID if empty
+          const finalEnrollmentId = enrollmentId || `WMCH/${new Date().getFullYear()}/${Math.floor(Math.random() * 10000)}`;
+          
+          await adminService.enrollStudent({
+              application_id: selectedApp.id,
+              batch_id: enrollmentBatch,
+              enrollment_number: finalEnrollmentId,
+              full_name: (selectedApp.step_data as any)?.name || selectedApp.applicant_name,
+              email: (selectedApp.step_data as any)?.email || selectedApp.applicant_email,
+              phone: (selectedApp.step_data as any)?.phone || selectedApp.applicant_phone
+          });
+          
+
+          // 2. Invoke Edge Function to send Email
+          const { error: inviteError } = await supabase.functions.invoke('invite-student', {
+            body: {
+                email: (selectedApp.step_data as any)?.email || selectedApp.applicant_email,
+                fullName: (selectedApp.step_data as any)?.name || selectedApp.applicant_name,
+                enrollmentId: finalEnrollmentId,
+            }
+          });
+
+          if (inviteError) {
+              console.error("Invitation Error:", inviteError);
+              toast.warning("Student enrolled, but email invitation failed. Check logs.");
+          } else {
+              toast.success("Student enrolled & Invitation Email sent!");
+          }
+          
+          // Optionally auto-close or refresh
+          setSelectedApp(null);
+      } catch (error: any) {
+          console.error(error);
+          toast.error(error.message || "Enrollment failed");
+      } finally {
+          setIsEnrolling(false);
       }
   }
 
@@ -65,7 +139,7 @@ export default function ApplicationsManager() {
             <p className="text-neutral-500 text-sm">Monitor real-time progress of applicants</p>
         </div>
         <div className="flex gap-2">
-            <Button variant="outline" onClick={fetchApplications}>Refresh</Button>
+            <Button variant="outline" onClick={fetchData}>Refresh</Button>
         </div>
       </div>
 
@@ -116,16 +190,16 @@ export default function ApplicationsManager() {
                     </div>
                 </TableCell>
                 <TableCell>
-                  <Badge className={getStatusColor(app.status)} variant="secondary">
+                    <Badge className={getStatusColor(app.status)} variant="secondary">
                     {app.status.toUpperCase()}
-                  </Badge>
+                    </Badge>
                 </TableCell>
                 <TableCell className="text-right">
                     <Dialog>
                         <DialogTrigger asChild>
-                            <Button variant="ghost" size="sm" onClick={() => setSelectedApp(app)}>View Details</Button>
+                            <Button variant="ghost" size="sm" onClick={() => { setSelectedApp(app); setEnrollmentBatch(""); }}>View Details</Button>
                         </DialogTrigger>
-                        <DialogContent className="max-w-2xl max-h-[80vh] flex flex-col">
+                        <DialogContent className="max-w-2xl max-h-[85vh] flex flex-col">
                             <DialogHeader>
                                 <DialogTitle>Application Details</DialogTitle>
                             </DialogHeader>
@@ -148,6 +222,50 @@ export default function ApplicationsManager() {
                                             </CardContent>
                                         </Card>
                                     </div>
+
+                                    {/* Enrollment Section (Only if Approved) */}
+                                    {selectedApp.status === 'approved' && (
+                                        <div className="bg-green-50 border border-green-200 rounded-xl p-4 space-y-4">
+                                            <div className="flex items-center gap-2 text-green-800 font-semibold">
+                                                <GraduationCap className="h-5 w-5" />
+                                                <h3>Student Enrollment</h3>
+                                            </div>
+                                            <p className="text-sm text-green-700">This applicant is approved. Enroll them to create a student account.</p>
+                                            
+                                            <div className="grid gap-4">
+                                                <div className="space-y-2">
+                                                    <label className="text-sm font-medium">Assign Batch</label>
+                                                    {batches.length > 0 ? (
+                                                        <Select value={enrollmentBatch} onValueChange={setEnrollmentBatch}>
+                                                            <SelectTrigger>
+                                                                <SelectValue placeholder="Select a batch" />
+                                                            </SelectTrigger>
+                                                            <SelectContent>
+                                                                {batches.map(b => (
+                                                                    <SelectItem key={b.id} value={b.id}>{b.name} ({b.program})</SelectItem>
+                                                                ))}
+                                                            </SelectContent>
+                                                        </Select>
+                                                    ) : (
+                                                        <Button variant="outline" size="sm" onClick={handleCreateBatch} className="w-full">
+                                                            Create Default Batch (2025)
+                                                        </Button>
+                                                    )}
+                                                </div>
+                                                <div className="space-y-2">
+                                                    <label className="text-sm font-medium">Enrollment ID (Optional - Auto-generated if empty)</label>
+                                                    <Input 
+                                                        placeholder="e.g. WMCH/2025/001" 
+                                                        value={enrollmentId}
+                                                        onChange={(e) => setEnrollmentId(e.target.value)}
+                                                    />
+                                                </div>
+                                                <Button onClick={handleEnroll} disabled={isEnrolling} className="w-full bg-green-600 hover:bg-green-700 text-white">
+                                                    {isEnrolling ? 'Enrolling...' : 'Confirm Enrollment'}
+                                                </Button>
+                                            </div>
+                                        </div>
+                                    )}
 
                                     <div className="space-y-2">
                                         <h3 className="font-semibold text-lg flex items-center gap-2"><User className="h-4 w-4" /> Personal Information</h3>
