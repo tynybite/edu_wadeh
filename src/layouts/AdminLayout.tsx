@@ -51,7 +51,6 @@ export default function AdminLayout() {
     { icon: Newspaper, label: 'News', path: '/admin/news' },
     { icon: CalendarDays, label: 'Admissions', path: '/admin/admissions' },
     { icon: FileText, label: 'Applications', path: '/admin/applications' },
-    { icon: Users, label: 'Leads', path: '/admin/leads' },
     { icon: CreditCard, label: 'Payments', path: '/admin/payments' },
     { icon: Settings, label: 'Settings', path: '/admin/settings' },
   ];

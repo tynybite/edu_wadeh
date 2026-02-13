@@ -416,33 +416,32 @@ export default function Apply() {
         },
       });
 
-      // Insert into Supabase (Leads)
-      const { data: leadData, error: leadError } = await supabase
-        .from('leads')
-        .insert([{
-          name: data.name,
-          email: data.email,
-          phone: data.phone,
-          program: data.course,
-          status: 'new'
-        }])
-        .select()
-        .single();
-      
-      if (leadError) console.error("Supabase Lead Error:", leadError);
+      // Update Application with Payment Details
+      const { error: appError } = await supabase
+        .from('applications')
+        .update({
+          status: 'submitted',
+          fee_amount: finalFee,
+          coupon_code: couponCode || null,
+          step_data: {
+              ...data,
+              paymentId,
+              submittedAt: new Date().toISOString()
+          },
+          // Ensure these fields are set if not already in step 1 save
+          applicant_name: data.name,
+          applicant_email: data.email,
+          applicant_phone: data.phone
+        })
+        .eq('id', applicationId); // applicationId comes from our hook
 
-      // Insert into Supabase (Payments)
-      if (leadData && paymentId) {
-          const { error: paymentError } = await supabase
-            .from('payments')
-            .insert([{
-                lead_id: leadData.id,
-                amount: finalFee,
-                status: 'success',
-                transaction_id: paymentId,
-                payment_method: 'razorpay'
-            }]);
-          if (paymentError) console.error("Supabase Payment Error:", paymentError);
+      if (appError) {
+          console.error("Failed to update application with payment:", appError);
+          toast({
+              title: "Warning",
+              description: "Payment successful but application status update failed. Please contact support.",
+              variant: "destructive"
+          });
       }
 
       setCurrentStep(4);

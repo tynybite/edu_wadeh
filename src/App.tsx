@@ -25,7 +25,6 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import NewsManager from "./pages/admin/NewsManager";
-import LeadsDashboard from "./pages/admin/LeadsDashboard";
 import PaymentsManager from "./pages/admin/PaymentsManager";
 import AdmissionsManager from "./pages/admin/AdmissionsManager";
 import NewsEditorPage from "./pages/admin/NewsEditorPage";
@@ -68,7 +67,6 @@ const App = () => (
             <Route path="news/create" element={<NewsEditorPage />} />
             <Route path="news/edit/:id" element={<NewsEditorPage />} />
             <Route path="applications" element={<ApplicationsManager />} />
-            <Route path="leads" element={<LeadsDashboard />} />
             <Route path="payments" element={<PaymentsManager />} />
             <Route path="admissions" element={<AdmissionsManager />} />
             <Route path="settings" element={<AppSettings />} />
