@@ -50,7 +50,10 @@ import {
   MorphingBlob,
   GradientText,
   MagneticButton,
+  Floating,
 } from "@/hooks/useAnimations";
+import { supabase } from "@/lib/supabase";
+import { useApplicationForm } from "@/hooks/useApplicationForm";
 
 declare global {
   interface Window {
@@ -89,7 +92,13 @@ const steps = [
   { number: 4, title: "Complete", icon: CheckCircle2 },
 ];
 
+
+
+// ... imports
+
 export default function Apply() {
+  const { applicationId, saveProgress, updateStatus } = useApplicationForm();
+  
   const [currentStep, setCurrentStep] = useState<Step>(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [paymentComplete, setPaymentComplete] = useState(false);
@@ -101,6 +110,100 @@ export default function Apply() {
     signature: null,
     photo: null
   });
+
+  const [applicationFee, setApplicationFee] = useState<number>(500);
+  const [couponCode, setCouponCode] = useState("");
+  const [discount, setDiscount] = useState(0);
+  const [couponError, setCouponError] = useState("");
+  const [couponSuccess, setCouponSuccess] = useState("");
+
+  const finalFee = Math.max(0, applicationFee - discount);
+
+  // Fetch dynamic fee
+  useEffect(() => {
+    const fetchFee = async () => {
+      const { data } = await supabase
+        .from('app_settings')
+        .select('value')
+        .eq('key', 'application_fee')
+        .single();
+      
+      if (data?.value) {
+        setApplicationFee(Number(data.value));
+      }
+    };
+    fetchFee();
+  }, []);
+
+  const [availableCoupons, setAvailableCoupons] = useState<any[]>([]);
+
+  // Fetch active coupons
+  useEffect(() => {
+    const fetchCoupons = async () => {
+      const { data } = await supabase
+        .from('coupons')
+        .select('*')
+        .eq('active', true);
+      
+      if (data) {
+        setAvailableCoupons(data);
+      }
+    };
+    fetchCoupons();
+  }, []);
+
+  const applyCouponCode = (code: string) => {
+    setCouponCode(code);
+    applyCoupon(code);
+  };
+   
+  // Modified applyCoupon to accept an optional code argument
+  const applyCoupon = async (codeOverride?: string) => {
+    const codeToApply = typeof codeOverride === 'string' ? codeOverride : couponCode;
+    
+    setCouponError("");
+    setCouponSuccess("");
+    setDiscount(0);
+
+    if (!codeToApply) return;
+
+
+    try {
+      const { data, error } = await supabase
+        .from('coupons')
+        .select('*')
+        .eq('code', codeToApply.toUpperCase())
+        .eq('active', true)
+        .single();
+
+      if (error || !data) {
+        setCouponError("Invalid or expired coupon code");
+        return;
+      }
+
+      let discountAmount = 0;
+      if (data.discount_type === 'percentage') {
+        discountAmount = (applicationFee * data.discount_value) / 100;
+      } else {
+        discountAmount = data.discount_value;
+      }
+
+      setDiscount(discountAmount);
+      setCouponSuccess(`Coupon applied! You saved ₹${discountAmount}`);
+      toast({
+        title: "Coupon Applied",
+        description: `You saved ₹${discountAmount}`,
+      });
+      
+      // Update the input field if applied via click
+      if (codeOverride) {
+          setCouponCode(codeOverride);
+      }
+
+    } catch (error) {
+      setCouponError("Failed to apply coupon");
+    }
+  };
 
   const { toast } = useToast();
 
@@ -134,6 +237,26 @@ export default function Apply() {
       consent: false
     }
   });
+
+  // Auto-save form data
+  useEffect(() => {
+    const subscription = form.watch((value) => {
+      const timeoutId = setTimeout(() => {
+        if (applicationId) {
+          saveProgress(currentStep, value);
+        }
+      }, 1000);
+      return () => clearTimeout(timeoutId);
+    });
+    return () => subscription.unsubscribe();
+  }, [form.watch, currentStep, applicationId, saveProgress]);
+
+  // Save current step whenever it changes
+  useEffect(() => {
+    if (applicationId) {
+      saveProgress(currentStep, form.getValues());
+    }
+  }, [currentStep, applicationId, saveProgress, form]);
 
   const convertToBase64 = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
@@ -186,6 +309,8 @@ export default function Apply() {
     setCurrentStep(3);
   };
 
+      // ... existing code ...
+
   const handlePayment = () => {
     const formData = form.getValues();
     
@@ -210,7 +335,7 @@ export default function Apply() {
     try {
       const options = {
         key: RAZORPAY_KEY,
-        amount: APPLICATION_FEE * 100, // Razorpay expects paise
+        amount: finalFee * 100, // Razorpay expects paise
         currency: "INR",
         name: branding.name,
         description: "Application Fee",
@@ -276,9 +401,11 @@ export default function Apply() {
         ...data,
         institution: "Wadeh Medical college and hospital",
         paymentId: paymentId,
-        applicationFee: APPLICATION_FEE,
+        applicationFee: finalFee,
         files: processedFiles
       };
+
+      await updateStatus('submitted');
 
       await fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
@@ -288,6 +415,35 @@ export default function Apply() {
           "Content-Type": "application/json",
         },
       });
+
+      // Insert into Supabase (Leads)
+      const { data: leadData, error: leadError } = await supabase
+        .from('leads')
+        .insert([{
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          program: data.course,
+          status: 'new'
+        }])
+        .select()
+        .single();
+      
+      if (leadError) console.error("Supabase Lead Error:", leadError);
+
+      // Insert into Supabase (Payments)
+      if (leadData && paymentId) {
+          const { error: paymentError } = await supabase
+            .from('payments')
+            .insert([{
+                lead_id: leadData.id,
+                amount: finalFee,
+                status: 'success',
+                transaction_id: paymentId,
+                payment_method: 'razorpay'
+            }]);
+          if (paymentError) console.error("Supabase Payment Error:", paymentError);
+      }
 
       setCurrentStep(4);
       toast({
@@ -356,7 +512,7 @@ export default function Apply() {
                   Start Your <GradientText>Journey</GradientText>
                 </h1>
                 <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-                  Complete your application in a few simple steps. Application fee: ₹{APPLICATION_FEE}
+                  Complete your application in a few simple steps. Application fee: ₹{applicationFee}
                 </p>
               </div>
             </Reveal>
@@ -573,7 +729,7 @@ export default function Apply() {
                                   </FormControl>
                                   <div className="space-y-1 leading-none">
                                     <FormLabel className="text-sm text-muted-foreground leading-relaxed">
-                                      I confirm that the information provided is accurate and I agree to be contacted for admission purposes. I understand that the application fee of ₹{APPLICATION_FEE} is non-refundable.
+                                      I confirm that the information provided is accurate and I agree to be contacted for admission purposes. I understand that the application fee of ₹{finalFee} is non-refundable.
                                     </FormLabel>
                                     <FormMessage />
                                   </div>
@@ -710,67 +866,136 @@ export default function Apply() {
                       </div>
                     </div>
 
-                    <div className="space-y-6">
-                      {/* Payment Summary */}
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 rounded-2xl p-8 border border-border/50"
-                      >
-                        <div className="text-center mb-6">
-                          <div className="text-5xl font-display font-black text-foreground mb-2">
-                            ₹{APPLICATION_FEE}
+                      <div className="space-y-6">
+                        {/* Payment Summary */}
+                        <motion.div
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 rounded-2xl p-8 border border-border/50"
+                        >
+                          <div className="text-center mb-6">
+                            <div className="text-5xl font-display font-black text-foreground mb-2">
+                              ₹{finalFee}
+                            </div>
+                            <p className="text-muted-foreground">
+                              {discount > 0 ? (
+                                <span className="line-through text-red-400 mr-2">₹{applicationFee}</span>
+                              ) : "One-time Application Fee"}
+                            </p>
                           </div>
-                          <p className="text-muted-foreground">One-time Application Fee</p>
-                        </div>
 
-                        <div className="space-y-3 text-sm">
-                          <div className="flex items-center gap-3 text-muted-foreground">
-                            <Check className="h-4 w-4 text-secondary" />
-                            <span>Application processing & verification</span>
-                          </div>
-                          <div className="flex items-center gap-3 text-muted-foreground">
-                            <Check className="h-4 w-4 text-secondary" />
-                            <span>Document review by admissions team</span>
-                          </div>
-                          <div className="flex items-center gap-3 text-muted-foreground">
-                            <Check className="h-4 w-4 text-secondary" />
-                            <span>Priority interview scheduling</span>
-                          </div>
-                          <div className="flex items-center gap-3 text-muted-foreground">
-                            <Check className="h-4 w-4 text-secondary" />
-                            <span>Admission counselor support</span>
-                          </div>
-                        </div>
-                      </motion.div>
+                          {/* Coupon Section */}
+                          <div className="bg-white/50 p-4 rounded-xl border border-neutral-200 mb-6">
+                            <label className="text-sm font-medium text-neutral-700 mb-2 block text-left">Have a coupon code?</label>
+                            <div className="flex gap-2 mb-4">
+                              <Input 
+                                placeholder="ENTER CODE"
+                                value={couponCode}
+                                onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
+                                className="uppercase font-mono"
+                              />
+                              <Button type="button" onClick={() => applyCoupon()} variant="secondary">Apply</Button>
+                            </div>
 
-                      {/* Security Badge */}
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.2 }}
-                        className="flex items-center justify-center gap-2 text-sm text-muted-foreground"
-                      >
-                        <Shield className="h-4 w-4 text-secondary" />
-                        <span>Secured by Razorpay • 100% Safe Payment</span>
-                      </motion.div>
+                            {/* Available Coupons List */}
+                            <AnimatePresence>
+                              {availableCoupons.length > 0 && (
+                                <div className="space-y-2">
+                                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Available Offers</p>
+                                  {availableCoupons.map((coupon) => (
+                                    <motion.div
+                                      key={coupon.id}
+                                      initial={{ opacity: 0, height: 0 }}
+                                      animate={{ opacity: 1, height: "auto" }}
+                                      exit={{ opacity: 0, height: 0 }}
+                                      className="flex items-center justify-between p-3 rounded-lg border border-dashed border-secondary/30 bg-secondary/5 hover:bg-secondary/10 transition-colors group"
+                                    >
+                                      <div className="flex flex-col text-left">
+                                        <span className="font-mono font-bold text-secondary">{coupon.code}</span>
+                                        <span className="text-xs text-muted-foreground">
+                                          {coupon.discount_type === 'percentage' 
+                                            ? `${coupon.discount_value}% OFF` 
+                                            : `₹${coupon.discount_value} OFF`}
+                                        </span>
+                                      </div>
+                                      <Button 
+                                        size="sm" 
+                                        variant="ghost" 
+                                        className="h-8 text-secondary hover:text-secondary-foreground hover:bg-secondary/20"
+                                        onClick={() => applyCouponCode(coupon.code)}
+                                      >
+                                        Apply
+                                      </Button>
+                                    </motion.div>
+                                  ))}
+                                </div>
+                              )}
+                            </AnimatePresence>
 
-                      {/* Applicant Summary */}
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.3 }}
-                        className="bg-muted/50 rounded-xl p-5 space-y-2"
-                      >
-                        <h4 className="font-semibold text-sm text-foreground mb-3">Application Summary</h4>
-                        <div className="flex justify-between text-sm">
-                          <span className="text-muted-foreground">Name:</span>
-                          <span className="font-medium text-foreground">{form.getValues("name")}</span>
-                        </div>
-                        <div className="flex justify-between text-sm">
-                          <span className="text-muted-foreground">Email:</span>
-                          <span className="font-medium text-foreground">{form.getValues("email")}</span>
-                        </div>
+                            {couponError && <p className="text-red-500 text-xs mt-2 text-left">{couponError}</p>}
+                            {couponSuccess && <p className="text-green-600 text-xs mt-2 text-left">{couponSuccess}</p>}
+                          </div>
+
+                          <div className="space-y-3 text-sm">
+                            <div className="flex justify-between text-neutral-600 border-b pb-2">
+                              <span>Base Fee</span>
+                              <span>₹{applicationFee}</span>
+                            </div>
+                            {discount > 0 && (
+                              <div className="flex justify-between text-green-600 border-b pb-2">
+                                <span>Discount</span>
+                                <span>- ₹{discount}</span>
+                              </div>
+                            )}
+                            <div className="flex justify-between font-bold text-neutral-900 pt-2">
+                                <span>Total Payable</span>
+                                <span>₹{finalFee}</span>
+                            </div>
+                            
+                            <div className="pt-4 space-y-2">
+                                <div className="flex items-center gap-3 text-muted-foreground">
+                                    <Check className="h-4 w-4 text-secondary" />
+                                    <span>Application processing & verification</span>
+                                </div>
+                                <div className="flex items-center gap-3 text-muted-foreground">
+                                    <Check className="h-4 w-4 text-secondary" />
+                                    <span>Document review by admissions team</span>
+                                </div>
+                                <div className="flex items-center gap-3 text-muted-foreground">
+                                    <Check className="h-4 w-4 text-secondary" />
+                                    <span>Priority interview scheduling</span>
+                                </div>
+                            </div>
+                          </div>
+                        </motion.div>
+
+                        {/* Security Badge */}
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 0.2 }}
+                          className="flex items-center justify-center gap-2 text-sm text-muted-foreground"
+                        >
+                          <Shield className="h-4 w-4 text-secondary" />
+                          <span>Secured by Razorpay • 100% Safe Payment</span>
+                        </motion.div>
+
+                        {/* Applicant Summary */}
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 0.3 }}
+                          className="bg-muted/50 rounded-xl p-5 space-y-2"
+                        >
+                          <h4 className="font-semibold text-sm text-foreground mb-3">Application Summary</h4>
+                          <div className="flex justify-between text-sm">
+                            <span className="text-muted-foreground">Name:</span>
+                            <span className="font-medium text-foreground">{form.getValues("name")}</span>
+                          </div>
+                          <div className="flex justify-between text-sm">
+                            <span className="text-muted-foreground">Email:</span>
+                            <span className="font-medium text-foreground">{form.getValues("email")}</span>
+                          </div>
                         <div className="flex justify-between text-sm">
                           <span className="text-muted-foreground">Program:</span>
                           <span className="font-medium text-foreground">
@@ -805,7 +1030,7 @@ export default function Apply() {
                             "Processing..."
                           ) : (
                             <>
-                              Pay ₹{APPLICATION_FEE} & Submit
+                              Pay ₹{finalFee} & Submit
                               <ArrowRight className="ml-2 h-5 w-5" />
                             </>
                           )}
