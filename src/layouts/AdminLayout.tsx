@@ -10,7 +10,8 @@ import {
   LogOut,
   Menu,
   FileText,
-  Settings
+  Settings,
+  Bell
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
@@ -43,12 +44,13 @@ export default function AdminLayout() {
   const handleLogout = async () => {
     await supabase.auth.signOut();
     toast.success('Logged out successfully');
-    navigate('/admin/login');
+    navigate('/login');
   };
 
   const navItems = [
     { icon: LayoutDashboard, label: 'Dashboard', path: '/admin' },
     { icon: Newspaper, label: 'News', path: '/admin/news' },
+    { icon: Bell, label: 'Notices', path: '/admin/notices' },
     { icon: CalendarDays, label: 'Admissions', path: '/admin/admissions' },
     { icon: FileText, label: 'Applications', path: '/admin/applications' },
     { icon: CreditCard, label: 'Payments', path: '/admin/payments' },

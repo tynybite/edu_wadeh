@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
 
-export default function ProtectedRoute() {
+export default function ProtectedRoute({ children, redirectPath = "/login" }: { children?: React.ReactNode, redirectPath?: string }) {
   const [session, setSession] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
@@ -30,8 +30,8 @@ export default function ProtectedRoute() {
   }
 
   if (!session) {
-    return <Navigate to="/admin/login" replace />;
+    return <Navigate to={redirectPath} replace />;
   }
 
-  return <Outlet />;
+  return children ? <>{children}</> : <Outlet />;
 }

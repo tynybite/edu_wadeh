@@ -24,6 +24,102 @@ export type Json =
 export interface Database {
     public: {
       Tables: {
+        batches: {
+          Row: {
+            id: string
+            created_at: string
+            name: string
+            program: string
+            start_date: string
+            end_date: string
+          }
+          Insert: {
+            id?: string
+            created_at?: string
+            name: string
+            program: string
+            start_date: string
+            end_date: string
+          }
+          Update: {
+            id?: string
+            created_at?: string
+            name?: string
+            program?: string
+            start_date?: string
+            end_date?: string
+          }
+        }
+        students: {
+          Row: {
+            id: string
+            created_at: string
+            user_id: string | null
+            application_id: string | null
+            batch_id: string | null
+            enrollment_number: string
+            current_semester: number
+            full_name: string | null
+            email: string | null
+            phone: string | null
+          }
+          Insert: {
+            id?: string
+            created_at?: string
+            user_id?: string | null
+            application_id?: string | null
+            batch_id?: string | null
+            enrollment_number: string
+            current_semester?: number
+            full_name?: string | null
+            email?: string | null
+            phone?: string | null
+          }
+          Update: {
+            id?: string
+            created_at?: string
+            user_id?: string | null
+            application_id?: string | null
+            batch_id?: string | null
+            enrollment_number?: string
+            current_semester?: number
+            full_name?: string | null
+            email?: string | null
+            phone?: string | null
+          }
+        }
+        notices: {
+          Row: {
+            id: string
+            created_at: string
+            title: string
+            content: string
+            audience_type: 'all' | 'batch' | 'program'
+            target_batch_id: string | null
+            is_active: boolean
+            author_id: string | null
+          }
+          Insert: {
+            id?: string
+            created_at?: string
+            title: string
+            content: string
+            audience_type?: 'all' | 'batch' | 'program'
+            target_batch_id?: string | null
+            is_active?: boolean
+            author_id?: string | null
+          }
+          Update: {
+            id?: string
+            created_at?: string
+            title?: string
+            content?: string
+            audience_type?: 'all' | 'batch' | 'program'
+            target_batch_id?: string | null
+            is_active?: boolean
+            author_id?: string | null
+          }
+        }
         news: {
           Row: {
             id: string
