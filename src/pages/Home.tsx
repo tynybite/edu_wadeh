@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { 
   GraduationCap, 
@@ -66,10 +66,31 @@ const stats = [
 ];
 
 export default function Home() {
+  const [newsItems, setNewsItems] = useState<any[]>([]);
+  
+  useEffect(() => {
+    // Fetch active news from Supabase
+    import('@/lib/supabase').then(({ supabase }) => {
+      supabase
+        .from('news')
+        .select('*')
+        .eq('is_active', true)
+        .order('published_at', { ascending: false })
+        .limit(3)
+        .then(({ data }) => {
+          if (data && data.length > 0) {
+            setNewsItems(data);
+          } else {
+             // Fallback to static blogs if no news
+             setNewsItems(blogPosts.filter(p => p.featured).slice(0, 3));
+          }
+        });
+    });
+  }, []);
+
   const featuredCourses = courses.filter(c => c.featured);
   const featuredTestimonials = testimonials.slice(0, 4);
   const featuredFaqs = faqs.slice(0, 5);
-  const featuredBlogs = blogPosts.filter(p => p.featured).slice(0, 3);
 
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -783,7 +804,7 @@ export default function Home() {
           </div>
 
           <Stagger stagger={0.15} className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {featuredBlogs.map((post) => (
+            {newsItems.map((post) => (
               <StaggerItem key={post.id}>
                 <Link to={`/blogs/${post.id}`}>
                   <motion.div
@@ -797,13 +818,18 @@ export default function Home() {
                     </div>
                     <div className="p-8">
                       <div className="flex items-center gap-3 mb-4">
-                        <Badge className="text-xs bg-secondary/10 text-secondary border-0">{post.category}</Badge>
-                        <span className="text-xs text-muted-foreground">{post.publishedAt}</span>
+                        <Badge className="text-xs bg-secondary/10 text-secondary border-0">{post.category || 'News'}</Badge>
+                        <span className="text-sm text-muted-foreground">{new Date(post.published_at || post.date).toLocaleDateString()}</span>
                       </div>
-                      <h3 className="font-display font-bold text-xl text-foreground group-hover:text-secondary transition-colors duration-300 mb-3 line-clamp-2">
+                      <h3 className="text-xl font-display font-bold text-foreground mb-3 line-clamp-2 group-hover:text-primary transition-colors duration-300">
                         {post.title}
                       </h3>
-                      <p className="text-muted-foreground line-clamp-2">{post.excerpt}</p>
+                      <p className="text-muted-foreground mb-6 line-clamp-3">
+                        {post.excerpt || post.content?.substring(0, 100)}...
+                      </p>
+                      <div className="flex items-center text-sm font-semibold text-primary">
+                         Read Article <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                      </div>
                     </div>
                   </motion.div>
                 </Link>

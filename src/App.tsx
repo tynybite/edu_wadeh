@@ -20,6 +20,18 @@ import Help from "./pages/Help";
 import Apply from "./pages/Apply";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
+import AdminLayout from "./layouts/AdminLayout";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
+import AdminLogin from "./pages/admin/AdminLogin";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import NewsManager from "./pages/admin/NewsManager";
+import LeadsDashboard from "./pages/admin/LeadsDashboard";
+import PaymentsManager from "./pages/admin/PaymentsManager";
+import AdmissionsManager from "./pages/admin/AdmissionsManager";
+import NewsEditorPage from "./pages/admin/NewsEditorPage";
+import ApplicationsManager from "./pages/admin/ApplicationsManager";
+import AppSettings from "./pages/admin/AppSettings";
+
 
 const queryClient = new QueryClient();
 
@@ -46,6 +58,23 @@ const App = () => (
           <Route path="/faqs" element={<FAQs />} />
           <Route path="/help" element={<Help />} />
           <Route path="/apply" element={<Apply />} />
+          
+          {/* Admin Routes */}
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="news" element={<NewsManager />} />
+            <Route path="news/create" element={<NewsEditorPage />} />
+            <Route path="news/edit/:id" element={<NewsEditorPage />} />
+            <Route path="applications" element={<ApplicationsManager />} />
+            <Route path="leads" element={<LeadsDashboard />} />
+            <Route path="payments" element={<PaymentsManager />} />
+            <Route path="admissions" element={<AdmissionsManager />} />
+            <Route path="settings" element={<AppSettings />} />
+            </Route>
+          </Route>
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
