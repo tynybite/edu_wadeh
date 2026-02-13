@@ -23,26 +23,22 @@ export default function AdminLayout() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Auth check is now handled by ProtectedRoute component
+  // We can keep a session state if needed for UI, but redirection is handled upstream
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setLoading(false);
-      if (!session) {
-        navigate('/admin/login');
-      }
     });
 
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
-      if (!session) {
-        navigate('/admin/login');
-      }
     });
 
     return () => subscription.unsubscribe();
-  }, [navigate]);
+  }, []);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();

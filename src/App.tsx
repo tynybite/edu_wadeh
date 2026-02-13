@@ -21,6 +21,7 @@ import Apply from "./pages/Apply";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 import AdminLayout from "./layouts/AdminLayout";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import NewsManager from "./pages/admin/NewsManager";
@@ -60,7 +61,8 @@ const App = () => (
           
           {/* Admin Routes */}
           <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin" element={<AdminLayout />}>
+          <Route element={<ProtectedRoute />}>
+            <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<AdminDashboard />} />
             <Route path="news" element={<NewsManager />} />
             <Route path="news/create" element={<NewsEditorPage />} />
@@ -70,6 +72,7 @@ const App = () => (
             <Route path="payments" element={<PaymentsManager />} />
             <Route path="admissions" element={<AdmissionsManager />} />
             <Route path="settings" element={<AppSettings />} />
+            </Route>
           </Route>
 
           <Route path="*" element={<NotFound />} />
